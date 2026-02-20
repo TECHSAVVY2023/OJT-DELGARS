@@ -1,0 +1,143 @@
+{
+  "site": {
+    "brandName": "Delgar",
+    "tagline": "Frozen Products",
+    "logoAlt": "Delgar"
+  },
+  "nav": {
+    "mainLinks": [
+      { "label": "Home", "href": "/client/landing" },
+      { "label": "Catalog", "href": "/client/catalog" },
+      { "label": "Contact Us", "href": "#contact" },
+      { "label": "About Us", "href": "#about" }
+    ],
+    "categoryLinks": [
+      { "label": "All Products", "href": "/client/catalog", "category": "All" },
+      { "label": "Seafood", "href": "/client/catalog?category=Seafood", "category": "Seafood" },
+      { "label": "Pork", "href": "/client/catalog?category=Pork", "category": "Pork" },
+      { "label": "Beef", "href": "/client/catalog?category=Beef", "category": "Beef" },
+      { "label": "Chicken", "href": "/client/catalog?category=Chicken", "category": "Chicken" },
+      { "label": "Others", "href": "/client/catalog?category=Others", "category": "Others" }
+    ],
+    "loginLabel": "Login"
+  },
+  "hero": {
+    "titleParts": [
+      { "text": "Delgar", "color": "#8B0101" },
+      { "text": "Frozen", "color": "#ADD8E6" },
+      { "text": "Products", "color": "#333333" }
+    ],
+    "intro": "For the Delgar Fam, we deliver high-quality frozen meats made to last longer, taste better, and serve your family right.",
+    "ctaLabel": "View our products"
+  },
+  "trust": {
+    "title": "Why Delgar Fam",
+    "titleHighlight": "Trusts Us",
+    "subtitle": "High-quality frozen meats handled with care, safety, and consistency.",
+    "reasons": [
+      {
+        "icon": "mdi:check-circle",
+        "title": "Premium Quality Meats",
+        "description": "Carefully selected frozen meats to ensure freshness, taste, and safety in every cut."
+      },
+      {
+        "icon": "mdi:lightning-bolt",
+        "title": "Proper Storage & Handling",
+        "description": "Stored and handled under strict conditions to preserve quality from source to store."
+      },
+      {
+        "icon": "mdi:account-group",
+        "title": "Trusted by the Delgar Fam",
+        "description": "A growing community that relies on Delgar for consistent quality and reliable service."
+      }
+    ]
+  },
+  "browseCategories": {
+    "label": "Categories",
+    "sectionTitle": "Browse by Category",
+    "items": [
+      { "id": 1, "name": "All Products", "image": "/logo/delgar-logo.png", "backTitle": "ALL PRODUCTS", "backSubtitle": "View all" },
+      { "id": 2, "name": "Pork", "image": "/logo/delgar-logo.png", "backTitle": "PORK", "backSubtitle": "Premium cuts" },
+      { "id": 3, "name": "Chicken", "image": "/logo/delgar-logo.png", "backTitle": "CHICKEN", "backSubtitle": "Fresh & lean" },
+      { "id": 4, "name": "Beef", "image": "/logo/delgar-logo.png", "backTitle": "BEEF", "backSubtitle": "Quality cuts" },
+      { "id": 5, "name": "Seafood", "image": "/logo/delgar-logo.png", "backTitle": "SEAFOOD", "backSubtitle": "Fresh catch" },
+      { "id": 6, "name": "Others", "image": "/logo/delgar-logo.png", "backTitle": "OTHERS", "backSubtitle": "Special items" }
+    ]
+  },
+  "catalog": {
+    "productsLabel": "Products",
+    "sectionTitle": "Frozen fresh for everyday meals.",
+    "searchPlaceholder": "Search anything....",
+    "exploreMoreLabel": "Explore More",
+    "products": [
+      { "id": 1, "category": "Seafood", "categoryClass": "bg-blue-400 text-white", "subcategory": "Shrimp", "name": "Frozen Tiger Prawns 500g", "price": "195.00", "stock": 12, "image": "/logo/delgar-logo.png" },
+      { "id": 2, "category": "Seafood", "categoryClass": "bg-blue-400 text-white", "subcategory": "Fish", "name": "Salmon Fillet Premium Cut", "price": "320.00", "stock": 8, "image": "/logo/delgar-logo.png" },
+      { "id": 3, "category": "Pork", "categoryClass": "bg-amber-100 text-amber-900", "subcategory": "Pork", "name": "Pork Belly Slice 1kg", "price": "280.00", "stock": 15, "image": "/logo/delgar-logo.png" },
+      { "id": 4, "category": "Pork", "categoryClass": "bg-amber-100 text-amber-900", "subcategory": "Pork", "name": "Pork Chop Family Pack", "price": "245.00", "stock": 6, "image": "/logo/delgar-logo.png" },
+      { "id": 5, "category": "Beef", "categoryClass": "bg-green-700 text-white", "subcategory": "Beef", "name": "Beef Brisket Frozen 1kg", "price": "450.00", "stock": 4, "image": "/logo/delgar-logo.png" },
+      { "id": 6, "category": "Beef", "categoryClass": "bg-green-700 text-white", "subcategory": "Beef", "name": "Bone Marrow Premium", "price": "380.00", "stock": 1, "image": "/logo/delgar-logo.png" },
+      { "id": 7, "category": "Chicken", "categoryClass": "bg-yellow-400 text-gray-900", "subcategory": "Chicken", "name": "Chicken Drumsticks 1kg", "price": "165.00", "stock": 20, "image": "/logo/delgar-logo.png" },
+      { "id": 8, "category": "Chicken", "categoryClass": "bg-yellow-400 text-gray-900", "subcategory": "Chicken", "name": "Chicken Breast Skinless", "price": "220.00", "stock": 10, "image": "/logo/delgar-logo.png" },
+      { "id": 9, "category": "Seafood", "categoryClass": "bg-blue-400 text-white", "subcategory": "Squid", "name": "Frozen Squid Rings 400g", "price": "185.00", "stock": 7, "image": "/logo/delgar-logo.png" },
+      { "id": 10, "category": "Others", "categoryClass": "bg-gray-500 text-white", "subcategory": "Processed", "name": "Frozen Sausage Pack 500g", "price": "145.00", "stock": 14, "image": "/logo/delgar-logo.png" }
+    ]
+  },
+  "about": {
+    "title": "About Us",
+    "paragraphs": [
+      "Delgar Store is a locally trusted provider of high-quality frozen meat products, serving households, small businesses, and food partners who value freshness and reliability.",
+      "We carefully select our products and follow proper storage and handling practices to ensure that quality, taste, and safety are preserved from sourcing to store.",
+      "Built for the Delgar Fam, our goal is to make dependable frozen meats accessible and easy to choose. As we continue to grow, we remain committed to consistency, transparency, and delivering products that families and partners can rely on every day."
+    ],
+    "ctaLabel": "EXPLORE",
+    "socialLinks": [
+      { "name": "Facebook", "url": "https://www.facebook.com", "icon": "mdi:facebook" },
+      { "name": "Instagram", "url": "https://www.instagram.com", "icon": "mdi:instagram" },
+      { "name": "Twitter", "url": "https://twitter.com", "icon": "mdi:twitter" }
+    ]
+  },
+  "contact": {
+    "leftTitle": "We're here",
+    "leftSubtitle": "Our door is always open for a good cup of coffee",
+    "mapQuery": "JP Rizal Avenue Infront of Penshoppe beside Sanbon Enterprises, Purok 4 Carmen Annex, Ozamiz City, Ozamiz, Philippines",
+    "rightTitle": "Let's Talk",
+    "rightSubtitle": "Share you experience and concerns with us",
+    "formPlaceholders": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "phone": "+63",
+      "message": "Write your message..."
+    },
+    "subjectLabel": "Select Subject?",
+    "subjects": [
+      "General Inquiry",
+      "Product Question",
+      "Order Support",
+      "Feedback"
+    ],
+    "sendButtonLabel": "Send Message"
+  },
+  "footer": {
+    "reachTitle": "Reach us",
+    "phone": "09978665777",
+    "email": "delgar@gmail.com",
+    "address": "JP Rizal Avenue Infront of Penshoppe beside Sanbon Enterprises, Purok 4 Carmen Annex, Ozamiz City, Ozamiz, Philippines",
+    "companyTitle": "Company",
+    "companyLinks": [
+      { "label": "About Us", "href": "#about" },
+      { "label": "Catalog", "href": "/client/catalog" },
+      { "label": "Contact Us", "href": "#contact" }
+    ],
+    "newsletterTitle": "Join Our Newsletter",
+    "newsletterPlaceholder": "Your email address",
+    "newsletterButton": "Subscribe",
+    "newsletterNote": "Will send you weekly updates for your better tool management.",
+    "copyright": "© 2024 Delgar Frozen Products. All rights reserved."
+  },
+  "fab": {
+    "cartTitle": "Shopping Cart",
+    "profileTitle": "Profile",
+    "logoutTitle": "Logout (Disabled)"
+  }
+}

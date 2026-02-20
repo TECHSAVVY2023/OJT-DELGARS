@@ -1,0 +1,355 @@
+{
+  "newsletter": {
+    "title": "Don't miss amazing and fresh deals",
+    "placeholder": "Your email address",
+    "buttonLabel": "Subscribe"
+  },
+  "categories": [
+    { "name": "All", "count": 16, "icon": "mdi:view-grid-outline" },
+    { "name": "Pork", "count": 4, "icon": "mdi:food-variant" },
+    { "name": "Chicken", "count": 5, "icon": "mdi:food-drumstick-outline" },
+    { "name": "Beef", "count": 6, "icon": "mdi:food-steak" },
+    { "name": "Seafood", "count": 10, "icon": "mdi:fish" },
+    { "name": "Others", "count": 10, "icon": "mdi:tag-multiple-outline" }
+  ],
+  "weightRanges": ["250g - 500g", "500g - 1kg", "1kg and above"],
+  "cutTypes": ["Whole", "Chopped", "Ground"],
+  "filters": {
+    "categoryTitle": "Category",
+    "priceTitle": "Fill by price",
+    "fromLabel": "From",
+    "toLabel": "To",
+    "weightTitle": "Weight Range",
+    "cutTypeTitle": "Cut Type",
+    "applyLabel": "Apply",
+    "newProductsTitle": "New products",
+    "availableSoonTitle": "Available soon"
+  },
+  "searchSort": {
+    "allCategoriesOption": "All Categories",
+    "searchPlaceholder": "Search for items...",
+    "compareLabel": "Compare",
+    "filtersLabel": "Filters"
+  },
+  "products": [
+    {
+      "id": 1,
+      "name": "Angie's Boomchickapop Sweet & Salty",
+      "category": "Seafood",
+      "price": 195,
+      "originalPrice": 195,
+      "image": "/logo/delgar-logo.png",
+      "inStock": true,
+      "stock": 12,
+      "badge": "Seafood"
+    },
+    {
+      "id": 2,
+      "name": "Angie's Boomchickapop Sweet & Salty",
+      "category": "Seafood",
+      "price": 195,
+      "originalPrice": 195,
+      "image": "/logo/delgar-logo.png",
+      "inStock": true,
+      "stock": 8,
+      "badge": "Seafood"
+    },
+    {
+      "id": 3,
+      "name": "Angie's Boomchickapop Sweet & Salty",
+      "category": "Seafood",
+      "price": 195,
+      "originalPrice": 195,
+      "image": "/logo/delgar-logo.png",
+      "inStock": true,
+      "stock": 7,
+      "badge": "Seafood"
+    },
+    {
+      "id": 4,
+      "name": "Angie's Boomchickapop Sweet & Salty",
+      "category": "Pork",
+      "price": 195,
+      "originalPrice": 195,
+      "image": "/logo/delgar-logo.png",
+      "inStock": true,
+      "stock": 15,
+      "badge": "Pork"
+    },
+    {
+      "id": 5,
+      "name": "Angie's Boomchickapop Sweet & Salty",
+      "category": "Pork",
+      "price": 195,
+      "originalPrice": 195,
+      "image": "/logo/delgar-logo.png",
+      "inStock": true,
+      "stock": 6,
+      "badge": "Pork"
+    },
+    {
+      "id": 6,
+      "name": "Angie's Boomchickapop Sweet & Salty",
+      "category": "Beef",
+      "price": 195,
+      "originalPrice": 195,
+      "image": "/logo/delgar-logo.png",
+      "inStock": true,
+      "stock": 4,
+      "badge": "Beef"
+    },
+    {
+      "id": 7,
+      "name": "Angie's Boomchickapop Sweet & Salty",
+      "category": "Beef",
+      "price": 195,
+      "originalPrice": 195,
+      "image": "/logo/delgar-logo.png",
+      "inStock": true,
+      "stock": 1,
+      "badge": "Beef"
+    },
+    {
+      "id": 8,
+      "name": "Angie's Boomchickapop Sweet & Salty",
+      "category": "Chicken",
+      "price": 195,
+      "originalPrice": 195,
+      "image": "/logo/delgar-logo.png",
+      "inStock": true,
+      "stock": 20,
+      "badge": "Chicken"
+    },
+    {
+      "id": 9,
+      "name": "Frozen Tiger Prawns 500g",
+      "category": "Seafood",
+      "price": 280,
+      "originalPrice": 280,
+      "image": "/logo/delgar-logo.png",
+      "inStock": true,
+      "stock": 14,
+      "badge": "Seafood"
+    },
+    {
+      "id": 10,
+      "name": "Salmon Fillet Premium Cut",
+      "category": "Seafood",
+      "price": 420,
+      "originalPrice": 420,
+      "image": "/logo/delgar-logo.png",
+      "inStock": true,
+      "stock": 6,
+      "badge": "Seafood"
+    },
+    {
+      "id": 11,
+      "name": "Pork Belly Slice 1kg",
+      "category": "Pork",
+      "price": 320,
+      "originalPrice": 320,
+      "image": "/logo/delgar-logo.png",
+      "inStock": true,
+      "stock": 11,
+      "badge": "Pork"
+    },
+    {
+      "id": 12,
+      "name": "Chicken Breast Skinless Pack",
+      "category": "Chicken",
+      "price": 245,
+      "originalPrice": 245,
+      "image": "/logo/delgar-logo.png",
+      "inStock": true,
+      "stock": 18,
+      "badge": "Chicken"
+    },
+    {
+      "id": 13,
+      "name": "Beef Brisket Frozen 1kg",
+      "category": "Beef",
+      "price": 480,
+      "originalPrice": 480,
+      "image": "/logo/delgar-logo.png",
+      "inStock": true,
+      "stock": 5,
+      "badge": "Beef"
+    },
+    {
+      "id": 14,
+      "name": "Frozen Squid Rings 400g",
+      "category": "Seafood",
+      "price": 185,
+      "originalPrice": 185,
+      "image": "/logo/delgar-logo.png",
+      "inStock": true,
+      "stock": 9,
+      "badge": "Seafood"
+    },
+    {
+      "id": 15,
+      "name": "Frozen Sausage Pack 500g",
+      "category": "Others",
+      "price": 165,
+      "originalPrice": 165,
+      "image": "/logo/delgar-logo.png",
+      "inStock": true,
+      "stock": 22,
+      "badge": "Others"
+    },
+    {
+      "id": 16,
+      "name": "Bone Marrow Premium",
+      "category": "Beef",
+      "price": 390,
+      "originalPrice": 390,
+      "image": "/logo/delgar-logo.png",
+      "inStock": true,
+      "stock": 3,
+      "badge": "Beef"
+    }
+  ],
+  "newProducts": [
+    { "name": "Chen Cardigan", "price": 99.5, "image": "/logo/delgar-logo.png" },
+    { "name": "Chen Sweater", "price": 89.5, "image": "/logo/delgar-logo.png" },
+    { "name": "Colorful Jacket", "price": 25, "image": "/logo/delgar-logo.png" }
+  ],
+  "deals": {
+    "titleHighlight": "Deals",
+    "titleRest": "Of The Day",
+    "allDealsLabel": "All Deals >",
+    "items": [
+      {
+        "name": "Seeds of Change Organic Quinoa",
+        "price": 195,
+        "originalPrice": 195,
+        "image": "/logo/delgar-logo.png",
+        "daysLeft": 42,
+        "hoursLeft": 8,
+        "minutesLeft": 17,
+        "secondsLeft": 58
+      },
+      {
+        "name": "Seeds of Change Organic Quinoa",
+        "price": 195,
+        "originalPrice": 195,
+        "image": "/logo/delgar-logo.png",
+        "daysLeft": 42,
+        "hoursLeft": 8,
+        "minutesLeft": 17,
+        "secondsLeft": 58
+      },
+      {
+        "name": "Seeds of Change Organic Quinoa",
+        "price": 195,
+        "originalPrice": 195,
+        "image": "/logo/delgar-logo.png",
+        "daysLeft": 42,
+        "hoursLeft": 8,
+        "minutesLeft": 17,
+        "secondsLeft": 58
+      },
+      {
+        "name": "Seeds of Change Organic Quinoa",
+        "price": 195,
+        "originalPrice": 195,
+        "image": "/logo/delgar-logo.png",
+        "daysLeft": 42,
+        "hoursLeft": 8,
+        "minutesLeft": 17,
+        "secondsLeft": 58
+      },
+      {
+        "name": "Premium Frozen Salmon Deal",
+        "price": 350,
+        "originalPrice": 420,
+        "image": "/logo/delgar-logo.png",
+        "daysLeft": 5,
+        "hoursLeft": 12,
+        "minutesLeft": 30,
+        "secondsLeft": 45
+      },
+      {
+        "name": "Chicken Family Pack Special",
+        "price": 299,
+        "originalPrice": 380,
+        "image": "/logo/delgar-logo.png",
+        "daysLeft": 10,
+        "hoursLeft": 6,
+        "minutesLeft": 22,
+        "secondsLeft": 10
+      }
+    ]
+  },
+  "promoBanners": [
+    {
+      "title": "Everyday Fresh & Clean with Our Products",
+      "ctaLabel": "Shop Now",
+      "image": "/logo/delgar-logo.png"
+    },
+    {
+      "title": "Make your Breakfast Healthy and Easy",
+      "ctaLabel": "Shop Now",
+      "image": "/logo/delgar-logo.png"
+    },
+    {
+      "title": "Make your Breakfast Healthy and Easy",
+      "ctaLabel": "Shop Now",
+      "image": "/logo/delgar-logo.png"
+    },
+    {
+      "title": "Premium Quality Meats Delivered to You",
+      "ctaLabel": "Shop Now",
+      "image": "/logo/delgar-logo.png"
+    }
+  ],
+  "newlyStocked": {
+    "titleHighlight": "Newly",
+    "titleRest": "stocked",
+    "categoryFilters": ["All", "Pork", "Chicken", "Beef", "Seafood", "Others"],
+    "items": [
+      {
+        "name": "Angie's Boomchickapop Sweet & Salty",
+        "category": "Seafood",
+        "price": 195,
+        "image": "/logo/delgar-logo.png",
+        "inStock": true
+      },
+      {
+        "name": "Angie's Boomchickapop Sweet & Salty",
+        "category": "Seafood",
+        "price": 195,
+        "image": "/logo/delgar-logo.png",
+        "inStock": false
+      },
+      {
+        "name": "Angie's Boomchickapop Sweet & Salty",
+        "category": "Seafood",
+        "price": 195,
+        "image": "/logo/delgar-logo.png",
+        "inStock": true
+      },
+      {
+        "name": "Angie's Boomchickapop Sweet & Salty",
+        "category": "Seafood",
+        "price": 195,
+        "image": "/logo/delgar-logo.png",
+        "inStock": true
+      }
+    ]
+  },
+  "imageSection": {
+    "mainTitle": "Bring fresh meats into your home",
+    "mainSubtitle": "Premium quality products delivered to your door",
+    "mainImage": "/logo/delgar-logo.png",
+    "cards": [
+      { "title": "Premium Cuts", "image": "/logo/delgar-logo.png" },
+      { "title": "Fresh Quality", "image": "/logo/delgar-logo.png" }
+    ]
+  },
+  "brandLabel": "By Delgar",
+  "retailLabel": "RETAIL",
+  "wholesaleLabel": "WHOLESALE",
+  "addLabel": "Add",
+  "inStockLabel": "1 in stock"
+}

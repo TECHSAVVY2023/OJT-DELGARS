@@ -1,0 +1,55 @@
+{
+  "stats": [
+    {
+      "label": "Total Products",
+      "value": "50",
+      "color": "from-[#8B0101] to-[#6B0001]",
+      "icon": "mdi:cog"
+    },
+    {
+      "label": "Total Stock Quantity",
+      "value": "500",
+      "color": "from-[#1e3a5f] to-[#0f2744]",
+      "icon": "mdi:package-variant"
+    },
+    {
+      "label": "Low Stock Items",
+      "value": "10",
+      "color": "from-[#059669] to-[#047857]",
+      "icon": "mdi:gift"
+    },
+    {
+      "label": "Expiring Soon",
+      "value": "5",
+      "color": "from-[#2563eb] to-[#1d4ed8]",
+      "icon": "mdi:shield-check"
+    }
+  ],
+  "timeframes": ["1D", "1W", "1M", "3M", "6M", "1Y"],
+  "yAxisLabels": [400, 300, 200, 100],
+  "stockChartData": {
+    "1D": [60, 80, 75, 90, 110, 95, 70, 85, 65, 100, 120, 130, 95, 105, 115, 90, 80, 70, 60, 50],
+    "1W": [80, 110, 100, 130, 150, 140, 120, 135, 115, 160, 180, 190, 150, 165, 175, 140, 130, 120, 110, 100],
+    "1M": [120, 150, 140, 170, 190, 180, 160, 175, 155, 200, 220, 230, 190, 205, 215, 180, 170, 160, 150, 140],
+    "3M": [160, 190, 180, 210, 230, 220, 200, 215, 195, 240, 260, 270, 230, 245, 255, 220, 210, 200, 190, 180],
+    "6M": [190, 220, 210, 240, 260, 250, 230, 245, 225, 270, 290, 300, 260, 275, 285, 250, 240, 230, 220, 210],
+    "1Y": [220, 250, 240, 270, 290, 280, 260, 275, 255, 300, 320, 330, 290, 305, 315, 280, 270, 260, 250, 240]
+  },
+  "maxStock": 400,
+  "lowStockProducts": [
+    { "name": "Placeholder", "id": "#940004", "instock": "21", "img": "🦐" },
+    { "name": "Placeholder", "id": "#665814", "instock": "08", "img": "🦐" }
+  ],
+  "expiringSoonProducts": [
+    { "name": "Placeholder", "id": "#940004", "quantity": "21", "img": "🦐" },
+    { "name": "Placeholder", "id": "#665814", "quantity": "08", "img": "🦐" }
+  ],
+  "outOfStockProducts": [
+    { "name": "Placeholder", "id": "#940004", "img": "🦐" },
+    { "name": "Placeholder", "id": "#665814", "img": "🦐" }
+  ],
+  "productOverview": [
+    { "name": "Placeholder", "id": "#940004", "img": "🦐" },
+    { "name": "Placeholder", "id": "#665814", "img": "🦐" }
+  ]
+}

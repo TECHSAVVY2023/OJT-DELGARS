@@ -1,0 +1,14 @@
+[
+  { "id": "PT001", "name": "Boneless Bangus", "category": "Seafood", "brand": "Local", "price": "₱600", "unit": "Pc", "qty": 100, "createdBy": "Admin", "avatar": "👤" },
+  { "id": "PT002", "name": "Boneless Bangus", "category": "Seafood", "brand": "Local", "price": "₱160", "unit": "Pc", "qty": 140, "createdBy": "Admin", "avatar": "👤" },
+  { "id": "PT003", "name": "Boneless Bangus", "category": "Seafood", "brand": "Local", "price": "₱110", "unit": "Pc", "qty": 300, "createdBy": "Admin", "avatar": "👤" },
+  { "id": "PT004", "name": "Boneless Bangus", "category": "Seafood", "brand": "Local", "price": "₱120", "unit": "Pc", "qty": 450, "createdBy": "Admin", "avatar": "👤" },
+  { "id": "PT005", "name": "Boneless Bangus", "category": "Seafood", "brand": "Local", "price": "₱80", "unit": "Pc", "qty": 320, "createdBy": "Admin", "avatar": "👤" },
+  { "id": "PT006", "name": "Boneless Bangus", "category": "Seafood", "brand": "Local", "price": "₱320", "unit": "Pc", "qty": 650, "createdBy": "Admin", "avatar": "👤" },
+  { "id": "PT007", "name": "Boneless Bangus", "category": "Seafood", "brand": "Local", "price": "₱60", "unit": "Pc", "qty": 700, "createdBy": "Admin", "avatar": "👤" },
+  { "id": "PT008", "name": "Boneless Bangus", "category": "Seafood", "brand": "Local", "price": "₱540", "unit": "Pc", "qty": 630, "createdBy": "Admin", "avatar": "👤" },
+  { "id": "PT009", "name": "Boneless Bangus", "category": "Seafood", "brand": "Local", "price": "₱200", "unit": "Pc", "qty": 410, "createdBy": "Admin", "avatar": "👤" },
+  { "id": "PT010", "name": "Boneless Bangus", "category": "Seafood", "brand": "Local", "price": "₱45", "unit": "Pc", "qty": 550, "createdBy": "Admin", "avatar": "👤" },
+  { "id": "PT011", "name": "Tilapia Fillets", "category": "Seafood", "brand": "Local", "price": "₱280", "unit": "Pc", "qty": 200, "createdBy": "Admin", "avatar": "👤" },
+  { "id": "PT012", "name": "Shrimp", "category": "Seafood", "brand": "Import", "price": "₱450", "unit": "Kg", "qty": 85, "createdBy": "Admin", "avatar": "👤" }
+]

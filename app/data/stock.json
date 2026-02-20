@@ -1,0 +1,14 @@
+[
+  { "id": 1, "warehouse": "Delgar", "store": "Delgar", "productName": "Boneless Bangus", "date": "24 Dec 2024", "person": "Admin", "qty": 100 },
+  { "id": 2, "warehouse": "Delgar", "store": "Delgar", "productName": "Boneless Bangus", "date": "10 Dec 2024", "person": "Admin", "qty": 140 },
+  { "id": 3, "warehouse": "Delgar", "store": "Delgar", "productName": "Boneless Bangus", "date": "27 Nov 2024", "person": "Admin", "qty": 300 },
+  { "id": 4, "warehouse": "Delgar", "store": "Delgar", "productName": "Boneless Bangus", "date": "18 Nov 2024", "person": "Admin", "qty": 450 },
+  { "id": 5, "warehouse": "Delgar", "store": "Delgar", "productName": "Boneless Bangus", "date": "06 Nov 2024", "person": "Admin", "qty": 320 },
+  { "id": 6, "warehouse": "Delgar", "store": "Delgar", "productName": "Boneless Bangus", "date": "25 Oct 2024", "person": "Admin", "qty": 650 },
+  { "id": 7, "warehouse": "Delgar", "store": "Delgar", "productName": "Boneless Bangus", "date": "14 Oct 2024", "person": "Admin", "qty": 700 },
+  { "id": 8, "warehouse": "Delgar", "store": "Delgar", "productName": "Boneless Bangus", "date": "03 Oct 2024", "person": "Admin", "qty": 630 },
+  { "id": 9, "warehouse": "Delgar", "store": "Delgar", "productName": "Boneless Bangus", "date": "20 Sep 2024", "person": "Admin", "qty": 410 },
+  { "id": 10, "warehouse": "Delgar", "store": "Delgar", "productName": "Boneless Bangus", "date": "10 Sep 2024", "person": "Admin", "qty": 550 },
+  { "id": 11, "warehouse": "Delgar", "store": "Delgar", "productName": "Tilapia Fillets", "date": "24 Dec 2024", "person": "Admin", "qty": 200 },
+  { "id": 12, "warehouse": "Delgar", "store": "Delgar", "productName": "Shrimp", "date": "10 Dec 2024", "person": "Admin", "qty": 85 }
+]

@@ -1,0 +1,16 @@
+{
+  "warehouses": ["All", "Delgar"],
+  "stores": ["All", "Delgar", "Store 1", "Store 2", "Store 3"],
+  "productOptions": ["All", "Boneless Bangus", "Tilapia Fillets", "Shrimp"],
+  "categories": ["All", "Seafood", "Meat", "Vegetables", "Dairy", "Frozen Foods"],
+  "categoryOptions": ["Seafood", "Meat", "Vegetables", "Dairy", "Frozen Foods"],
+  "brands": ["All", "Local", "Import", "Organic"],
+  "brandOptions": ["Local", "Import", "Organic"],
+  "units": ["Pc", "Kg", "L", "Box"],
+  "sellingTypes": ["Single", "Bundle"],
+  "taxTypes": ["VAT", "No Tax"],
+  "discountTypes": ["Fixed", "Percentage"],
+  "barcodeSymbologies": ["Code128", "EAN13", "UPC"],
+  "parentCategoryOptions": ["Seafood", "Pork", "Chicken", "Beef", "Others"],
+  "statusOptions": ["All", "Active", "Inactive"]
+}

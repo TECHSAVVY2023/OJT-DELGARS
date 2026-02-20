@@ -1,0 +1,12 @@
+[
+  { "id": 1, "name": "Bangus", "parentCategory": "Seafood", "slug": "bangus", "createdOn": "24 Dec 2024", "status": "Active" },
+  { "id": 2, "name": "Tilapia", "parentCategory": "Seafood", "slug": "tilapia", "createdOn": "10 Dec 2024", "status": "Active" },
+  { "id": 3, "name": "Shrimp", "parentCategory": "Seafood", "slug": "shrimp", "createdOn": "27 Nov 2024", "status": "Active" },
+  { "id": 4, "name": "Pork Belly", "parentCategory": "Pork", "slug": "pork-belly", "createdOn": "18 Nov 2024", "status": "Active" },
+  { "id": 5, "name": "Chicken Wings", "parentCategory": "Chicken", "slug": "chicken-wings", "createdOn": "06 Nov 2024", "status": "Active" },
+  { "id": 6, "name": "Ground Beef", "parentCategory": "Beef", "slug": "ground-beef", "createdOn": "25 Oct 2024", "status": "Active" },
+  { "id": 7, "name": "Squid", "parentCategory": "Seafood", "slug": "squid", "createdOn": "14 Oct 2024", "status": "Active" },
+  { "id": 8, "name": "Crab", "parentCategory": "Seafood", "slug": "crab", "createdOn": "03 Oct 2024", "status": "Active" },
+  { "id": 9, "name": "Placeholder", "parentCategory": "Others", "slug": "placeholder", "createdOn": "20 Sep 2024", "status": "Active" },
+  { "id": 10, "name": "Placeholder", "parentCategory": "Others", "slug": "placeholder-2", "createdOn": "10 Sep 2024", "status": "Active" }
+]

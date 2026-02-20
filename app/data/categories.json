@@ -1,0 +1,12 @@
+[
+  { "id": 1, "name": "All", "slug": "all", "createdOn": "24 Dec 2024", "status": "Active" },
+  { "id": 2, "name": "Pork", "slug": "pork", "createdOn": "10 Dec 2024", "status": "Active" },
+  { "id": 3, "name": "Beef", "slug": "beef", "createdOn": "27 Nov 2024", "status": "Active" },
+  { "id": 4, "name": "Chicken", "slug": "chicken", "createdOn": "18 Nov 2024", "status": "Active" },
+  { "id": 5, "name": "Seafood", "slug": "seafood", "createdOn": "06 Nov 2024", "status": "Active" },
+  { "id": 6, "name": "Others", "slug": "others", "createdOn": "25 Oct 2024", "status": "Active" },
+  { "id": 7, "name": "Placeholder", "slug": "placeholder", "createdOn": "14 Oct 2024", "status": "Active" },
+  { "id": 8, "name": "Placeholder", "slug": "placeholder-2", "createdOn": "03 Oct 2024", "status": "Active" },
+  { "id": 9, "name": "Placeholder", "slug": "placeholder-3", "createdOn": "20 Sep 2024", "status": "Active" },
+  { "id": 10, "name": "Placeholder", "slug": "placeholder-4", "createdOn": "10 Sep 2024", "status": "Active" }
+]

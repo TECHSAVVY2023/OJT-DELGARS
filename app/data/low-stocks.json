@@ -1,0 +1,12 @@
+[
+  { "id": "PT001", "name": "Boneless Bangus", "currentStock": 8, "threshold": 10, "status": "Low" },
+  { "id": "PT002", "name": "Tilapia Fillets", "currentStock": 5, "threshold": 15, "status": "Low" },
+  { "id": "PT003", "name": "Shrimp 500g", "currentStock": 3, "threshold": 20, "status": "Low" },
+  { "id": "PT004", "name": "Squid Rings", "currentStock": 12, "threshold": 25, "status": "Low" },
+  { "id": "PT005", "name": "Salmon Belly", "currentStock": 4, "threshold": 10, "status": "Low" },
+  { "id": "PT006", "name": "Crab Sticks", "currentStock": 7, "threshold": 30, "status": "Low" },
+  { "id": "PT007", "name": "Fish Balls", "currentStock": 6, "threshold": 20, "status": "Low" },
+  { "id": "PT008", "name": "Milkfish", "currentStock": 9, "threshold": 15, "status": "Low" },
+  { "id": "PT009", "name": "Tuna Chunks", "currentStock": 2, "threshold": 12, "status": "Low" },
+  { "id": "PT010", "name": "Prawns", "currentStock": 11, "threshold": 25, "status": "Low" }
+]

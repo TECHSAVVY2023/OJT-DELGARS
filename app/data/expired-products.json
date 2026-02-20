@@ -1,0 +1,12 @@
+[
+  { "id": "PT001", "name": "Boneless bangus", "manufacturedDate": "24 Dec 2024", "expiredDate": "20 Dec 2026" },
+  { "id": "PT002", "name": "Boneless Bangus", "manufacturedDate": "10 Dec 2024", "expiredDate": "07 Dec 2026" },
+  { "id": "PT003", "name": "Boneless Bangus", "manufacturedDate": "27 Nov 2024", "expiredDate": "20 Nov 2026" },
+  { "id": "PT004", "name": "Boneless Bangus", "manufacturedDate": "18 Nov 2024", "expiredDate": "15 Nov 2026" },
+  { "id": "PT005", "name": "Boneless Bangus", "manufacturedDate": "06 Nov 2024", "expiredDate": "04 Nov 2026" },
+  { "id": "PT006", "name": "Boneless Bangus", "manufacturedDate": "25 Oct 2024", "expiredDate": "20 Oct 2026" },
+  { "id": "PT007", "name": "Boneless Bangus", "manufacturedDate": "14 Oct 2024", "expiredDate": "10 Oct 2026" },
+  { "id": "PT008", "name": "Boneless Bangus", "manufacturedDate": "03 Oct 2024", "expiredDate": "01 Oct 2026" },
+  { "id": "PT009", "name": "Boneless Bangus", "manufacturedDate": "20 Sep 2024", "expiredDate": "16 Sep 2026" },
+  { "id": "PT010", "name": "Boneless Bangus", "manufacturedDate": "10 Sep 2024", "expiredDate": "06 Sep 2026" }
+]
