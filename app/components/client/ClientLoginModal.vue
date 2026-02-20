@@ -65,7 +65,7 @@ onBeforeUnmount(() => {
     <Transition name="modal-backdrop" appear>
       <div
         v-if="modelValue"
-        class="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4"
+        class="fixed inset-0 z-100 flex items-center justify-center bg-black/50 p-4"
         @click.self="close"
       >
         <Transition name="modal-panel" appear>
@@ -183,16 +183,10 @@ onBeforeUnmount(() => {
                 </div>
               </div>
 
-              <div class="relative flex w-full items-center justify-center overflow-hidden bg-gradient-to-br from-[#D4C5B9] via-[#DFD3C8] to-[#E8DCD0] p-6 sm:p-8 md:w-7/12 md:p-12">
-                <div class="absolute inset-0 overflow-hidden pointer-events-none">
-                  <div class="absolute top-10 left-10 w-20 h-20 bg-[#B32134]/10 rounded-full blur-2xl animate-pulse" />
-                  <div class="absolute bottom-20 right-10 w-32 h-32 bg-[#B32134]/5 rounded-full blur-3xl animate-pulse" style="animation-delay: 0.5s" />
-                  <div class="absolute top-1/3 right-1/4 w-24 h-24 bg-blue-300/10 rounded-full blur-2xl animate-pulse" style="animation-delay: 1s" />
-                </div>
-
+              <div class="relative flex w-full items-center justify-center overflow-hidden bg-linear-to-br from-[#D4C5B9] via-[#DFD3C8] to-[#E8DCD0] p-6 sm:p-8 md:w-7/12 md:p-12">
                 <div class="relative z-10 flex flex-col items-center gap-6 sm:gap-8">
                   <div class="relative">
-                    <div class="absolute -inset-4 bg-gradient-to-r from-[#B32134]/20 to-transparent rounded-full blur-xl animate-pulse" />
+                    <div class="absolute -inset-4 bg-linear-to-r from-[#B32134]/20 to-transparent rounded-full blur-xl animate-pulse" />
                     <div
                       class="relative flex h-56 w-56 sm:h-64 sm:w-64 items-center justify-center overflow-hidden rounded-full border-4 border-white bg-white shadow-2xl md:h-80 md:w-80"
                     >
