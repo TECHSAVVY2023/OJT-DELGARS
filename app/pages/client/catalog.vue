@@ -161,7 +161,7 @@ watch(
 </script>
 
 <template>
-  <div class="min-h-screen bg-white" style="font-family: 'Poppins', sans-serif">
+  <div class="min-h-screen bg-white">
     <ClientHeader />
 
     <ClientProductInfoModal
@@ -607,12 +607,6 @@ watch(
 </template>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
-
-html {
-  scroll-behavior: smooth;
-}
-
 /* Fill by price: transparent track, only thumbs visible; track color is the div behind */
 .price-range-input {
   -webkit-appearance: none;

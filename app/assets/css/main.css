@@ -1,9 +1,17 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "Poppins", sans-serif;
 }
 
 .font-roboto-condensed {
   font-family: "Roboto Condensed", sans-serif;
+}
+
+.font-nunito-sans {
+  font-family: "Nunito Sans", sans-serif;
 }

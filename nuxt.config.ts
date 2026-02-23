@@ -17,6 +17,7 @@ export default defineNuxtConfig({
     families: [
       { name: "Poppins", provider: "google" },
       { name: "Roboto Condensed", provider: "google" },
-    ]
+      { name: "Nunito Sans", provider: "google" },
+    ],
   },
 });

@@ -59,7 +59,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-white" style="font-family: 'Poppins', sans-serif">
+  <div class="min-h-screen bg-white">
     <ClientHeader />
 
     <!-- Hero Section - containers span full width; only content padding aligns with header -->
