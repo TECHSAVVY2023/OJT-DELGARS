@@ -1,0 +1,56 @@
+{
+  "hero": {
+    "title": "About Delgar",
+    "subtitle": "High-quality frozen meats for the Delgar Fam—trusted from source to table.",
+    "image": "/logo/delgar-logo.png",
+    "imageAlt": "Delgar Frozen Products"
+  },
+  "story": {
+    "sectionLabel": "Our Story",
+    "title": "Built for families and partners who value quality",
+    "paragraphs": [
+      "Delgar Store is a locally trusted provider of high-quality frozen meat products, serving households, small businesses, and food partners who value freshness and reliability.",
+      "We carefully select our products and follow proper storage and handling practices to ensure that quality, taste, and safety are preserved from sourcing to store.",
+      "Built for the Delgar Fam, our goal is to make dependable frozen meats accessible and easy to choose. As we continue to grow, we remain committed to consistency, transparency, and delivering products that families and partners can rely on every day."
+    ],
+    "stats": [
+      { "value": "10+", "label": "Years of trust" },
+      { "value": "5", "label": "Product categories" },
+      { "value": "100%", "label": "Quality focused" }
+    ]
+  },
+  "values": {
+    "sectionLabel": "What we stand for",
+    "title": "Our Values",
+    "items": [
+      {
+        "icon": "mdi:shield-check",
+        "title": "Quality & Safety",
+        "description": "Every product is selected and handled under strict standards so you get the best taste and safety."
+      },
+      {
+        "icon": "mdi:handshake",
+        "title": "Trust & Transparency",
+        "description": "We believe in honest sourcing and clear practices—no shortcuts, just reliability you can count on."
+      },
+      {
+        "icon": "mdi:heart",
+        "title": "Family First",
+        "description": "We exist to serve the Delgar Fam—households and partners who deserve consistent, great-tasting frozen meats."
+      }
+    ]
+  },
+  "connect": {
+    "title": "Connect with us",
+    "subtitle": "Follow us for updates, tips, and news from Delgar.",
+    "socialLinks": [
+      { "name": "Facebook", "url": "https://www.facebook.com", "icon": "mdi:facebook" },
+      { "name": "Instagram", "url": "https://www.instagram.com", "icon": "mdi:instagram" },
+      { "name": "Twitter", "url": "https://twitter.com", "icon": "mdi:twitter" }
+    ],
+    "backToHomeLabel": "Back to Home",
+    "backToHomeHref": "/client/landing",
+    "contactLabel": "Contact Us",
+    "contactHref": "/client/landing#contact"
+  }
+}

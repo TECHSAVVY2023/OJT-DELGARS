@@ -82,7 +82,9 @@ onBeforeUnmount(() => {
               @click="close"
             >
               <span class="sr-only">Close</span>
-              <Icon name="mdi:close" class="h-5 w-5" />
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6l12 12M18 6L6 18" />
+              </svg>
             </button>
 
             <div class="flex flex-col bg-white md:flex-row">
@@ -123,9 +125,19 @@ onBeforeUnmount(() => {
                           placeholder="alex@email.com"
                           class="flex-1 rounded-l-lg bg-gray-100 px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base text-gray-700 placeholder-gray-500 transition focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#8B0101]"
                         />
-                        <span class="flex items-center justify-center rounded-r-lg bg-[#8B0101] px-3 sm:px-4 py-2.5 sm:py-3 text-white">
-                          <Icon name="mdi:email" class="h-5 w-5" />
-                        </span>
+                        <button
+                          type="button"
+                          class="flex items-center justify-center rounded-r-lg bg-[#8B0101] px-3 sm:px-4 py-2.5 sm:py-3 text-white transition hover:bg-[#6B0001]"
+                        >
+                          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                            />
+                          </svg>
+                        </button>
                       </div>
                     </div>
 
@@ -138,9 +150,19 @@ onBeforeUnmount(() => {
                           placeholder="Enter your password"
                           class="flex-1 rounded-l-lg bg-gray-100 px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base text-gray-700 placeholder-gray-500 transition focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#8B0101]"
                         />
-                        <span class="flex items-center justify-center rounded-r-lg bg-[#8B0101] px-3 sm:px-4 py-2.5 sm:py-3 text-white">
-                          <Icon name="mdi:lock" class="h-5 w-5" />
-                        </span>
+                        <button
+                          type="button"
+                          class="flex items-center justify-center rounded-r-lg bg-[#8B0101] px-3 sm:px-4 py-2.5 sm:py-3 text-white transition hover:bg-[#6B0001]"
+                        >
+                          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                            />
+                          </svg>
+                        </button>
                       </div>
                     </div>
 
@@ -184,11 +206,17 @@ onBeforeUnmount(() => {
               </div>
 
               <div class="relative flex w-full items-center justify-center overflow-hidden bg-linear-to-br from-[#D4C5B9] via-[#DFD3C8] to-[#E8DCD0] p-6 sm:p-8 md:w-7/12 md:p-12">
+                <div class="absolute inset-0 overflow-hidden pointer-events-none">
+                  <div class="absolute top-10 left-10 w-20 h-20 bg-[#B32134]/10 rounded-full blur-2xl animate-pulse" />
+                  <div class="absolute bottom-20 right-10 w-32 h-32 bg-[#B32134]/5 rounded-full blur-3xl animate-pulse" style="animation-delay: 0.5s;" />
+                  <div class="absolute top-1/3 right-1/4 w-24 h-24 bg-blue-300/10 rounded-full blur-2xl animate-pulse" style="animation-delay: 1s;" />
+                </div>
+
                 <div class="relative z-10 flex flex-col items-center gap-6 sm:gap-8">
                   <div class="relative">
                     <div class="absolute -inset-4 bg-linear-to-r from-[#B32134]/20 to-transparent rounded-full blur-xl animate-pulse" />
                     <div
-                      class="relative flex h-56 w-56 sm:h-64 sm:w-64 items-center justify-center overflow-hidden rounded-full border-4 border-white bg-white shadow-2xl md:h-80 md:w-80"
+                      class="relative flex h-56 w-56 sm:h-64 sm:w-64 items-center justify-center overflow-hidden rounded-full border-4 border-white bg-white shadow-2xl md:h-80 md:w-80 hover:shadow-3xl transition-shadow duration-300"
                     >
                       <img
                         src="/logo/delgar-logo.png"
@@ -199,14 +227,26 @@ onBeforeUnmount(() => {
                   </div>
 
                   <div class="relative flex gap-4">
-                    <div class="w-3 h-3 rounded-full bg-[#B32134] animate-bounce" style="animation-delay: 0s" />
-                    <div class="w-3 h-3 rounded-full bg-[#B32134] animate-bounce" style="animation-delay: 0.2s" />
-                    <div class="w-3 h-3 rounded-full bg-[#B32134] animate-bounce" style="animation-delay: 0.4s" />
+                    <div class="w-3 h-3 rounded-full bg-[#B32134] animate-bounce" style="animation-delay: 0s;" />
+                    <div class="w-3 h-3 rounded-full bg-[#B32134] animate-bounce" style="animation-delay: 0.2s;" />
+                    <div class="w-3 h-3 rounded-full bg-[#B32134] animate-bounce" style="animation-delay: 0.4s;" />
                   </div>
 
                   <p class="text-center text-sm font-medium text-gray-600 max-w-xs">
                     Premium Frozen Products
                   </p>
+
+                  <div class="absolute -bottom-20 left-1/2 transform -translate-x-1/2 w-96 h-96">
+                    <div class="absolute inset-0 bg-linear-to-t from-[#B32134]/5 to-transparent rounded-full blur-3xl animate-pulse" style="animation-duration: 4s;" />
+                  </div>
+
+                  <svg class="absolute top-1/4 -left-12 w-24 h-24 text-[#B32134]/20 animate-float" viewBox="0 0 24 24" fill="currentColor">
+                    <circle cx="12" cy="12" r="10" />
+                  </svg>
+
+                  <svg class="absolute bottom-1/3 -right-8 w-20 h-20 text-[#B32134]/15 animate-float" style="animation-delay: 1s;" viewBox="0 0 24 24" fill="currentColor">
+                    <circle cx="12" cy="12" r="10" />
+                  </svg>
                 </div>
               </div>
             </div>
@@ -244,5 +284,18 @@ onBeforeUnmount(() => {
 .modal-panel-leave-to {
   opacity: 0;
   transform: translateY(12px) scale(0.985);
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
 }
 </style>

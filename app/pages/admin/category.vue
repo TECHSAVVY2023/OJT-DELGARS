@@ -73,6 +73,7 @@ const submitAddCategory = () => {
 
 const handleAddCategory = () => { openAddCategoryModal(); };
 const handleEdit = (id: number) => { success(`Editing category: ${id}`); };
+const handleArchive = (id: number) => { info(`Category ${id} archived`); };
 const handleDelete = (id: number) => { error(`Category ${id} deleted`); };
 </script>
 
@@ -93,7 +94,7 @@ const handleDelete = (id: number) => { error(`Category ${id} deleted`); };
               <h1 class="text-3xl font-bold text-gray-900">Category</h1>
             </div>
             <div class="flex items-center gap-3">
-              <div class="flex items-center gap-2 border-l border-gray-200 pl-3">
+              <div class="flex items-center gap-2">
                 <button class="p-2.5 hover:bg-gray-100 rounded-lg transition" title="Export to PDF"><Icon name="mdi:file-pdf" class="w-7 h-7 text-red-500" /></button>
                 <button class="p-2.5 hover:bg-gray-100 rounded-lg transition" title="Export to Excel"><Icon name="mdi:file-excel" class="w-7 h-7 text-green-600" /></button>
                 <button class="p-2.5 hover:bg-gray-100 rounded-lg transition" title="Print"><Icon name="mdi:printer" class="w-7 h-7 text-gray-600" /></button>
@@ -163,6 +164,7 @@ const handleDelete = (id: number) => { error(`Category ${id} deleted`); };
                   </td>
                   <td class="px-6 py-4 text-center">
                     <div class="flex items-center justify-center gap-2">
+                      <button @click="handleArchive(item.id)" class="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition" title="Archive"><Icon name="mdi:archive" class="w-5 h-5" /></button>
                       <button @click="handleEdit(item.id)" class="p-1.5 text-gray-400 hover:text-amber-600 hover:bg-amber-50 rounded transition" title="Edit"><Icon name="mdi:pencil" class="w-5 h-5" /></button>
                       <button @click="handleDelete(item.id)" class="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded transition" title="Delete"><Icon name="mdi:trash-can" class="w-5 h-5" /></button>
                     </div>

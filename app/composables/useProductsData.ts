@@ -7,7 +7,7 @@ export interface Product {
   brand: string;
   price: string;
   unit: string;
-  qty: number;
+  expirationDate: string;
   createdBy: string;
   avatar: string;
 }

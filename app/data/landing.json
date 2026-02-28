@@ -9,7 +9,7 @@
       { "label": "Home", "href": "/client/landing" },
       { "label": "Catalog", "href": "/client/catalog" },
       { "label": "Contact Us", "href": "#contact" },
-      { "label": "About Us", "href": "#about" }
+      { "label": "About Us", "href": "/client/about-us" }
     ],
     "categoryLinks": [
       { "label": "All Products", "href": "/client/catalog", "category": "All" },
@@ -125,7 +125,7 @@
     "address": "JP Rizal Avenue Infront of Penshoppe beside Sanbon Enterprises, Purok 4 Carmen Annex, Ozamiz City, Ozamiz, Philippines",
     "companyTitle": "Company",
     "companyLinks": [
-      { "label": "About Us", "href": "#about" },
+      { "label": "About Us", "href": "/client/about-us" },
       { "label": "Catalog", "href": "/client/catalog" },
       { "label": "Contact Us", "href": "#contact" }
     ],

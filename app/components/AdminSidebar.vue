@@ -7,10 +7,8 @@ const isDashboardPage = computed(() => route.path === "/admin/adminsahboard");
 const isStockPage = computed(() => route.path === "/admin/stock");
 const isCreatePage = computed(() => route.path === "/admin/create");
 const isProductsPage = computed(() => route.path === "/admin/products");
-const isExpiredPage = computed(() => route.path === "/admin/expired");
-const isLowStocksPage = computed(() => route.path === "/admin/low-stocks");
 const isCategoryPage = computed(() => route.path === "/admin/category");
-const isSubcategoryPage = computed(() => route.path === "/admin/subcategory");
+const isActivityLogsPage = computed(() => route.path === "/admin/activity-logs");
 const activeLinkClass = (isActive: boolean) =>
   isActive ? "font-medium text-[#8B0101] bg-red-50" : "text-gray-600 hover:bg-gray-50";
 
@@ -62,17 +60,8 @@ const handleLogout = async () => {
           <NuxtLink to="/admin/create" :class="['flex items-center gap-3 px-4 py-3 text-sm rounded-lg', activeLinkClass(isCreatePage)]">
             <Icon name="mdi:plus-circle" class="w-5 h-5" /><span>Create Product</span>
           </NuxtLink>
-          <NuxtLink to="/admin/expired" :class="['flex items-center gap-3 px-4 py-3 text-sm rounded-lg', activeLinkClass(isExpiredPage)]">
-            <Icon name="mdi:clock-alert" class="w-5 h-5" /><span>Expired Products</span>
-          </NuxtLink>
-          <NuxtLink to="/admin/low-stocks" :class="['flex items-center gap-3 px-4 py-3 text-sm rounded-lg', activeLinkClass(isLowStocksPage)]">
-            <Icon name="mdi:alert-circle" class="w-5 h-5" /><span>Low Stocks</span>
-          </NuxtLink>
           <NuxtLink to="/admin/category" :class="['flex items-center gap-3 px-4 py-3 text-sm rounded-lg', activeLinkClass(isCategoryPage)]">
             <Icon name="mdi:folder" class="w-5 h-5" /><span>Category</span>
-          </NuxtLink>
-          <NuxtLink to="/admin/subcategory" :class="['flex items-center gap-3 px-4 py-3 text-sm rounded-lg', activeLinkClass(isSubcategoryPage)]">
-            <Icon name="mdi:folder-multiple" class="w-5 h-5" /><span>Sub Category</span>
           </NuxtLink>
         </div>
         <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mt-6 mb-4">Stock</p>
@@ -83,11 +72,14 @@ const handleLogout = async () => {
           >
             <Icon name="mdi:clipboard-list" class="w-5 h-5" /><span>Manage Stock</span>
           </NuxtLink>
-          <NuxtLink to="/admin/stock/adjustment" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-600 hover:bg-gray-50 rounded-lg">
-            <Icon name="mdi:pencil" class="w-5 h-5" /><span>Stock Adjustment</span>
-          </NuxtLink>
-          <NuxtLink to="/admin/stock/transfer" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-600 hover:bg-gray-50 rounded-lg">
-            <Icon name="mdi:transfer" class="w-5 h-5" /><span>Stock Transfer</span>
+        </div>
+        <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mt-6 mb-4">System</p>
+        <div class="space-y-2">
+          <NuxtLink
+            to="/admin/activity-logs"
+            :class="['flex items-center gap-3 px-4 py-3 text-sm rounded-lg', activeLinkClass(isActivityLogsPage)]"
+          >
+            <Icon name="mdi:history" class="w-5 h-5" /><span>Activity Logs</span>
           </NuxtLink>
         </div>
       </div>
@@ -96,13 +88,9 @@ const handleLogout = async () => {
         <NuxtLink to="/admin/super-admin" class="flex items-center justify-center w-full p-3 text-gray-600 hover:bg-gray-100 rounded-lg transition" title="Super Admin"><Icon name="mdi:account-circle" class="w-5 h-5" /></NuxtLink>
         <NuxtLink to="/admin/products" class="flex items-center justify-center w-full p-3 rounded-lg transition" :class="isProductsPage ? 'text-[#8B0101] bg-red-50' : 'text-gray-600 hover:bg-gray-100'" title="Products"><Icon name="mdi:package-variant" class="w-5 h-5" /></NuxtLink>
         <NuxtLink to="/admin/create" class="flex items-center justify-center w-full p-3 rounded-lg transition" :class="isCreatePage ? 'text-[#8B0101] bg-red-50' : 'text-gray-600 hover:bg-gray-100'" title="Create Product"><Icon name="mdi:plus-circle" class="w-5 h-5" /></NuxtLink>
-        <NuxtLink to="/admin/expired" class="flex items-center justify-center w-full p-3 rounded-lg transition" :class="isExpiredPage ? 'text-[#8B0101] bg-red-50' : 'text-gray-600 hover:bg-gray-100'" title="Expired"><Icon name="mdi:clock-alert" class="w-5 h-5" /></NuxtLink>
-        <NuxtLink to="/admin/low-stocks" class="flex items-center justify-center w-full p-3 rounded-lg transition" :class="isLowStocksPage ? 'text-[#8B0101] bg-red-50' : 'text-gray-600 hover:bg-gray-100'" title="Low Stocks"><Icon name="mdi:alert-circle" class="w-5 h-5" /></NuxtLink>
         <NuxtLink to="/admin/category" class="flex items-center justify-center w-full p-3 rounded-lg transition" :class="isCategoryPage ? 'text-[#8B0101] bg-red-50' : 'text-gray-600 hover:bg-gray-100'" title="Category"><Icon name="mdi:folder" class="w-5 h-5" /></NuxtLink>
-        <NuxtLink to="/admin/subcategory" class="flex items-center justify-center w-full p-3 rounded-lg transition" :class="isSubcategoryPage ? 'text-[#8B0101] bg-red-50' : 'text-gray-600 hover:bg-gray-100'" title="Sub Category"><Icon name="mdi:folder-multiple" class="w-5 h-5" /></NuxtLink>
         <NuxtLink to="/admin/stock" class="flex items-center justify-center w-full p-3 rounded-lg transition" :class="isStockPage ? 'text-[#8B0101] bg-red-50' : 'text-gray-600 hover:bg-gray-100'" title="Manage Stock"><Icon name="mdi:clipboard-list" class="w-5 h-5" /></NuxtLink>
-        <NuxtLink to="/admin/stock/adjustment" class="flex items-center justify-center w-full p-3 text-gray-600 hover:bg-gray-100 rounded-lg transition" title="Stock Adjustment"><Icon name="mdi:pencil" class="w-5 h-5" /></NuxtLink>
-        <NuxtLink to="/admin/stock/transfer" class="flex items-center justify-center w-full p-3 text-gray-600 hover:bg-gray-100 rounded-lg transition" title="Stock Transfer"><Icon name="mdi:transfer" class="w-5 h-5" /></NuxtLink>
+        <NuxtLink to="/admin/activity-logs" class="flex items-center justify-center w-full p-3 rounded-lg transition" :class="isActivityLogsPage ? 'text-[#8B0101] bg-red-50' : 'text-gray-600 hover:bg-gray-100'" title="Activity Logs"><Icon name="mdi:history" class="w-5 h-5" /></NuxtLink>
       </div>
     </nav>
     <div class="p-4 border-t border-gray-200">

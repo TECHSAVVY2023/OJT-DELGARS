@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "action": "Product created",
+    "user": "admin@delgar.com",
+    "timestamp": "2025-02-28T09:15:32Z",
+    "details": "Added product \"Premium Salmon Fillet 500g\" to category Seafood",
+    "type": "create",
+    "entity": "product"
+  },
+  {
+    "id": 2,
+    "action": "Stock updated",
+    "user": "warehouse@delgar.com",
+    "timestamp": "2025-02-28T08:42:18Z",
+    "details": "Quantity adjusted for \"Frozen Prawns 1kg\" from 45 to 120 units",
+    "type": "update",
+    "entity": "stock"
+  },
+  {
+    "id": 3,
+    "action": "Category archived",
+    "user": "admin@delgar.com",
+    "timestamp": "2025-02-28T07:58:00Z",
+    "details": "Category \"Seasonal Items\" set to Inactive",
+    "type": "archive",
+    "entity": "category"
+  },
+  {
+    "id": 4,
+    "action": "Admin login",
+    "user": "admin@delgar.com",
+    "timestamp": "2025-02-28T07:30:12Z",
+    "details": "Successful login from 192.168.1.105",
+    "type": "login",
+    "entity": "auth"
+  },
+  {
+    "id": 5,
+    "action": "Product deleted",
+    "user": "admin@delgar.com",
+    "timestamp": "2025-02-27T16:22:45Z",
+    "details": "Removed discontinued product \"Old Recipe Fish Fingers\"",
+    "type": "delete",
+    "entity": "product"
+  },
+  {
+    "id": 6,
+    "action": "Stock low alert",
+    "user": "system",
+    "timestamp": "2025-02-27T14:00:00Z",
+    "details": "Frozen Cod Fillets (ID #7821) fell below threshold: 8 units",
+    "type": "alert",
+    "entity": "stock"
+  },
+  {
+    "id": 7,
+    "action": "Subcategory created",
+    "user": "admin@delgar.com",
+    "timestamp": "2025-02-27T11:05:33Z",
+    "details": "Created subcategory \"Ready Meals\" under Meals",
+    "type": "create",
+    "entity": "subcategory"
+  },
+  {
+    "id": 8,
+    "action": "Bulk stock import",
+    "user": "warehouse@delgar.com",
+    "timestamp": "2025-02-27T09:20:00Z",
+    "details": "Imported 15 products from CSV (batch #2025-0217)",
+    "type": "import",
+    "entity": "stock"
+  },
+  {
+    "id": 9,
+    "action": "Failed login attempt",
+    "user": "unknown",
+    "timestamp": "2025-02-26T18:45:22Z",
+    "details": "Failed login for admin@delgar.com from 10.0.0.88 - invalid password",
+    "type": "login_failed",
+    "entity": "auth"
+  },
+  {
+    "id": 10,
+    "action": "Category edited",
+    "user": "admin@delgar.com",
+    "timestamp": "2025-02-26T15:10:11Z",
+    "details": "Updated category \"Seafood\" slug from seafood to seafood-fresh",
+    "type": "update",
+    "entity": "category"
+  },
+  {
+    "id": 11,
+    "action": "Export completed",
+    "user": "admin@delgar.com",
+    "timestamp": "2025-02-26T12:00:05Z",
+    "details": "Exported stock report to PDF (Manage Stock page)",
+    "type": "export",
+    "entity": "report"
+  },
+  {
+    "id": 12,
+    "action": "Product restored",
+    "user": "admin@delgar.com",
+    "timestamp": "2025-02-25T14:33:00Z",
+    "details": "Restored archived product \"Lobster Tails 200g\" to Active",
+    "type": "restore",
+    "entity": "product"
+  }
+]

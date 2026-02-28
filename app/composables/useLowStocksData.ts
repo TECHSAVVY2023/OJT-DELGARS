@@ -9,9 +9,9 @@ export interface LowStockItem {
 }
 
 export const useLowStocksData = () => {
-  const lowStockItems = useState<LowStockItem[]>("lowStockItems", () => lowStocksData as LowStockItem[]);
-
-  return {
-    lowStockItems,
-  };
+  const lowStockItems = useState<LowStockItem[]>(
+    "lowStockItems",
+    () => lowStocksData as LowStockItem[]
+  );
+  return { lowStockItems };
 };

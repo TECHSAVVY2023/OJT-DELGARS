@@ -19,7 +19,6 @@ const formData = ref({
   storage: "",
   slug: "",
   sellingType: "",
-  subCategory: "",
   unit: "",
   barcodeSymbology: "",
   productType: "single",
@@ -161,12 +160,6 @@ const handleGenerateItemCode = () => {
                       <option v-for="cat in categories" :key="cat" :value="cat">{{ cat }}</option>
                     </select>
                     <p class="text-xs text-amber-600 mt-1 flex items-center gap-1"><Icon name="mdi:plus" class="w-4 h-4" /> Add New</p>
-                  </div>
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Sub Category <span class="text-red-500">*</span></label>
-                    <select v-model="formData.subCategory" class="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm bg-white hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-[#8B0101]">
-                      <option value="">Select</option>
-                    </select>
                   </div>
                 </div>
                 <div class="grid grid-cols-2 gap-6">

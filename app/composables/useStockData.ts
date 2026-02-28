@@ -2,12 +2,12 @@ import stockData from "~/data/stock.json";
 
 export interface StockEntry {
   id: number;
-  warehouse: string;
-  store: string;
   productName: string;
+  category: string;
   date: string;
   person: string;
   qty: number;
+  threshold: number;
 }
 
 export const useStockData = () => {

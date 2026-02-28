@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, onMounted, watch } from "vue";
 import { useToast } from "~/composables/useToast";
 import { useRoute } from "vue-router";
 import { useProductsData } from "~/composables/useProductsData";
@@ -12,9 +12,29 @@ const { options } = useOptionsData();
 
 const selectedCategory = ref("All");
 const selectedBrand = ref("All");
+const expiredFilter = ref<"all" | "expired" | "notExpired">("all");
 const searchQuery = ref("");
 const currentPage = ref(1);
 const rowsPerPage = ref(10);
+
+// Apply expired filter from query when coming from dashboard (e.g. ?expiredFilter=expired)
+function syncExpiredFilterFromRoute() {
+  const query = route.query.expiredFilter as string;
+  if (query === "expired") expiredFilter.value = "expired";
+}
+onMounted(syncExpiredFilterFromRoute);
+watch(() => route.query.expiredFilter, syncExpiredFilterFromRoute);
+
+/** Parse "DD MMM YYYY" and return true if date is before today. */
+function isProductExpired(expirationDate: string): boolean {
+  if (!expirationDate) return false;
+  const d = new Date(expirationDate);
+  if (Number.isNaN(d.getTime())) return false;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  d.setHours(0, 0, 0, 0);
+  return d < today;
+}
 
 const categories = computed(() => options.value.categories);
 const brands = computed(() => options.value.brands);
@@ -42,11 +62,9 @@ const editForm = ref({
   storage: "Cold Storage",
   slug: "",
   sellingType: "Single",
-  subCategory: "",
   unit: "",
   barcodeSymbology: "Code128",
   productType: "single" as "single" | "variable",
-  quantity: "",
   price: "",
   taxType: "VAT",
   discountType: "Fixed",
@@ -68,7 +86,12 @@ const filteredProducts = computed(() => {
       searchQuery.value === "" ||
       product.name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
       product.id.toLowerCase().includes(searchQuery.value.toLowerCase());
-    return matchCategory && matchBrand && matchSearch;
+    const expired = isProductExpired(product.expirationDate);
+    const matchExpired =
+      expiredFilter.value === "all" ||
+      (expiredFilter.value === "expired" && expired) ||
+      (expiredFilter.value === "notExpired" && !expired);
+    return matchCategory && matchBrand && matchSearch && matchExpired;
   });
 });
 
@@ -97,10 +120,6 @@ const handleAddProduct = () => {
   navigateTo("/admin/create");
 };
 
-const handleImportProduct = () => {
-  info("Import Product feature - under construction");
-};
-
 const openEditProduct = (product: typeof products.value[0]) => {
   editingProductId.value = product.id;
   const priceNum = product.price.replace(/[^\d]/g, "") || "0";
@@ -115,11 +134,9 @@ const openEditProduct = (product: typeof products.value[0]) => {
     storage: "Cold Storage",
     slug: product.name.toLowerCase().replace(/\s+/g, "-"),
     sellingType: "Single",
-    subCategory: "",
     unit: product.unit,
     barcodeSymbology: "Code128",
     productType: "single",
-    quantity: String(product.qty),
     price: priceNum,
     taxType: "VAT",
     discountType: "Fixed",
@@ -127,7 +144,7 @@ const openEditProduct = (product: typeof products.value[0]) => {
     quantityAlert: "10",
     manufacturer: "",
     manufacturedDate: "",
-    expiryOn: "",
+    expiryOn: product.expirationDate || "",
   };
   showEditProductModal.value = true;
 };
@@ -149,7 +166,7 @@ const submitEditProduct = () => {
     brand: editForm.value.brand || "",
     price: priceVal,
     unit: editForm.value.unit || "",
-    qty: Number(editForm.value.quantity) || 0,
+    expirationDate: editForm.value.expiryOn || "",
   });
   success("Product updated successfully!");
   closeEditProductModal();
@@ -160,12 +177,12 @@ const handleEditProduct = (productId: string) => {
   if (product) openEditProduct(product);
 };
 
-const handleDeleteProduct = (productId: string) => {
-  error(`Product ${productId} deleted successfully`);
+const handleArchiveProduct = (productId: string) => {
+  info(`Product ${productId} archived`);
 };
 
-const handleViewProduct = (productId: string) => {
-  info(`Viewing product: ${productId}`);
+const handleDeleteProduct = (productId: string) => {
+  error(`Product ${productId} deleted successfully`);
 };
 </script>
 
@@ -187,22 +204,13 @@ const handleViewProduct = (productId: string) => {
               <h1 class="text-3xl font-bold text-gray-900">Products</h1>
             </div>
             <div class="flex items-center gap-3">
-              <div class="flex items-center gap-1 border-r border-gray-300 pr-3">
-                <button
-                  @click="handleAddProduct"
-                  class="px-3 py-2 bg-amber-500 text-white rounded-lg font-semibold hover:bg-amber-600 transition flex items-center gap-2 text-sm"
-                >
-                  <Icon name="mdi:plus" class="w-5 h-5" />
-                  Add Product
-                </button>
-                <button
-                  @click="handleImportProduct"
-                  class="px-3 py-2 text-white rounded-lg font-semibold transition flex items-center gap-2 text-sm bg-[#092C4C] hover:bg-[#071f38]"
-                >
-                  <Icon name="mdi:import" class="w-5 h-5" />
-                  Import Product
-                </button>
-              </div>
+              <button
+                @click="handleAddProduct"
+                class="px-3 py-2 bg-amber-500 text-white rounded-lg font-semibold hover:bg-amber-600 transition flex items-center gap-2 text-sm"
+              >
+                <Icon name="mdi:plus" class="w-5 h-5" />
+                Add Product
+              </button>
               <div class="flex items-center gap-1">
                 <button class="p-2 hover:bg-red-50 rounded-lg transition" title="Export to PDF">
                   <Icon name="mdi:file-pdf" class="w-5 h-5 text-red-500" />
@@ -250,6 +258,17 @@ const handleViewProduct = (productId: string) => {
                   <option v-for="brand in brands" :key="brand" :value="brand">{{ brand }}</option>
                 </select>
               </div>
+              <div class="flex items-center gap-2">
+                <label class="text-sm font-medium text-gray-700">Expired</label>
+                <select
+                  v-model="expiredFilter"
+                  class="px-4 py-2 border border-gray-300 rounded-lg text-sm bg-white text-gray-700 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-[#8B0101] focus:ring-offset-0 cursor-pointer transition"
+                >
+                  <option value="all">All</option>
+                  <option value="expired">Expired only</option>
+                  <option value="notExpired">Not expired</option>
+                </select>
+              </div>
             </div>
           </div>
         </div>
@@ -272,7 +291,7 @@ const handleViewProduct = (productId: string) => {
                   <th class="px-6 py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">Brand</th>
                   <th class="px-6 py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">Price</th>
                   <th class="px-6 py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">Unit</th>
-                  <th class="px-6 py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">Qty</th>
+                  <th class="px-6 py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">Expiration Date</th>
                   <th class="px-6 py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">Created By</th>
                   <th class="px-6 py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">Actions</th>
                 </tr>
@@ -302,7 +321,9 @@ const handleViewProduct = (productId: string) => {
                   <td class="px-6 py-4 text-sm text-gray-600 text-center">{{ product.brand }}</td>
                   <td class="px-6 py-4 text-sm font-semibold text-gray-900 text-center">{{ product.price }}</td>
                   <td class="px-6 py-4 text-sm text-gray-600 text-center">{{ product.unit }}</td>
-                  <td class="px-6 py-4 text-sm font-medium text-gray-900 text-center">{{ product.qty }}</td>
+                  <td class="px-6 py-4 text-sm text-gray-600 text-center">
+                    <span :class="isProductExpired(product.expirationDate) ? 'text-red-600 font-medium' : ''">{{ product.expirationDate }}</span>
+                  </td>
                   <td class="px-6 py-4 text-center">
                     <div class="flex items-center justify-center gap-2">
                       <div
@@ -320,11 +341,11 @@ const handleViewProduct = (productId: string) => {
                   <td class="px-6 py-4 text-center">
                     <div class="flex items-center justify-center gap-2">
                       <button
-                        @click="handleViewProduct(product.id)"
+                        @click="handleArchiveProduct(product.id)"
                         class="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition"
-                        title="View"
+                        title="Archive"
                       >
-                        <Icon name="mdi:eye" class="w-5 h-5" />
+                        <Icon name="mdi:archive" class="w-5 h-5" />
                       </button>
                       <button
                         @click="handleEditProduct(product.id)"
@@ -481,12 +502,6 @@ const handleViewProduct = (productId: string) => {
                         <option v-for="c in categoryOptions" :key="c" :value="c">{{ c }}</option>
                       </select>
                     </div>
-                    <div>
-                      <label class="block text-xs font-medium text-gray-700 mb-1">Sub Category</label>
-                      <select v-model="editForm.subCategory" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-[#8B0101] focus:border-transparent">
-                        <option value="">Select</option>
-                      </select>
-                    </div>
                   </div>
                   <div class="grid grid-cols-2 gap-4">
                     <div>
@@ -556,11 +571,7 @@ const handleViewProduct = (productId: string) => {
                       <span class="text-sm text-gray-700">Variable</span>
                     </label>
                   </div>
-                  <div class="grid grid-cols-3 gap-4">
-                    <div>
-                      <label class="block text-xs font-medium text-gray-700 mb-1">Quantity</label>
-                      <input v-model="editForm.quantity" type="number" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B0101] focus:border-transparent" />
-                    </div>
+                  <div class="grid grid-cols-2 gap-4">
                     <div>
                       <label class="block text-xs font-medium text-gray-700 mb-1">Price</label>
                       <input v-model="editForm.price" type="text" placeholder="e.g. 600" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B0101] focus:border-transparent" />

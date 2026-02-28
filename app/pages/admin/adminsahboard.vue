@@ -2,21 +2,43 @@
 import { ref, computed } from "vue";
 import { useToast } from "~/composables/useToast";
 import { useDashboardData } from "~/composables/useDashboardData";
+import { useLowStocksData } from "~/composables/useLowStocksData";
 
 const selectedTimeframe = ref("1Y");
 
 const { success, info } = useToast();
 const { dashboard } = useDashboardData();
+const { lowStockItems } = useLowStocksData();
 
-const stats = computed(() => dashboard.value.stats);
 const timeframes = computed(() => dashboard.value.timeframes);
 const yAxisLabels = computed(() => dashboard.value.yAxisLabels);
 const stockChartData = computed(() => dashboard.value.stockChartData);
 const maxStock = computed(() => dashboard.value.maxStock);
-const lowStockProducts = computed(() => dashboard.value.lowStockProducts);
 const expiringSoonProducts = computed(() => dashboard.value.expiringSoonProducts);
 const outOfStockProducts = computed(() => dashboard.value.outOfStockProducts);
 const productOverview = computed(() => dashboard.value.productOverview);
+
+// Low stock products from low-stocks.json (always has data)
+const lowStockProducts = computed(() =>
+  lowStockItems.value.map((item) => ({
+    name: item.name,
+    id: item.id,
+    instock: String(item.currentStock),
+    img: "🦐",
+  }))
+);
+
+const lowStockCount = computed(() => lowStockProducts.value.length);
+
+// Stats with dynamic Low Stock Items count
+const stats = computed(() => {
+  const base = dashboard.value.stats;
+  return base.map((s) =>
+    s.label === "Low Stock Items"
+      ? { ...s, value: String(lowStockCount.value) }
+      : s
+  );
+});
 
 const currentStocks = computed(() => {
   return stockChartData.value[selectedTimeframe.value] || stockChartData.value["1Y"];
@@ -25,6 +47,14 @@ const currentStocks = computed(() => {
 const barHeight = (value: number) => {
   const clamped = Math.min(value, maxStock.value);
   return `${(clamped / maxStock.value) * 100}%`;
+};
+
+const statLink = (label: string) => {
+  if (label === "Total Products") return "/admin/products";
+  if (label === "Total Stock Quantity") return "/admin/stock";
+  if (label === "Low Stock Items") return "/admin/stock?stockFilter=low";
+  if (label === "Expiring Soon") return "/admin/products?expiredFilter=expired";
+  return "#";
 };
 
 </script>
@@ -67,10 +97,11 @@ const barHeight = (value: number) => {
           </div>
 
           <div class="grid grid-cols-4 gap-6 mb-8">
-            <div
+            <NuxtLink
               v-for="stat in stats"
               :key="stat.label"
-              :class="['rounded-xl p-6 text-white', `bg-linear-to-br ${stat.color}`]"
+              :to="statLink(stat.label)"
+              :class="['rounded-xl p-6 text-white block transition hover:opacity-95', `bg-linear-to-br ${stat.color}`]"
             >
               <div class="flex items-start justify-between">
                 <div>
@@ -79,7 +110,7 @@ const barHeight = (value: number) => {
                 </div>
                 <Icon :name="stat.icon" class="w-8 h-8" />
               </div>
-            </div>
+            </NuxtLink>
           </div>
 
           <div class="bg-white rounded-xl p-6 mb-8 shadow-sm border border-gray-200">
@@ -138,10 +169,15 @@ const barHeight = (value: number) => {
                   <Icon name="mdi:alert-circle" class="w-5 h-5 text-orange-500" />
                   Low Stock Products
                 </h3>
-                <NuxtLink to="/admin/low-stocks" class="text-sm text-[#8B0101] hover:underline font-medium">View All</NuxtLink>
+                <NuxtLink to="/admin/stock?stockFilter=low" class="text-sm text-[#8B0101] hover:underline font-medium">View All</NuxtLink>
               </div>
               <div class="space-y-4">
-                <div v-for="product in lowStockProducts" :key="product.id" class="flex items-center gap-3">
+                <NuxtLink
+                  v-for="product in lowStockProducts.slice(0, 2)"
+                  :key="product.id"
+                  to="/admin/stock?stockFilter=low"
+                  class="flex items-center gap-3 rounded-lg p-2 -m-2 hover:bg-gray-50 transition"
+                >
                   <span class="text-3xl">{{ product.img }}</span>
                   <div class="flex-1">
                     <p class="text-sm font-medium text-gray-900">{{ product.name }}</p>
@@ -149,7 +185,7 @@ const barHeight = (value: number) => {
                   </div>
                   <p class="text-sm font-semibold text-orange-600">{{ product.instock }}</p>
                   <p class="text-xs text-gray-500">Instock</p>
-                </div>
+                </NuxtLink>
               </div>
             </div>
 
@@ -159,10 +195,15 @@ const barHeight = (value: number) => {
                   <Icon name="mdi:clock-alert" class="w-5 h-5 text-blue-500" />
                   Expiring Soon
                 </h3>
-                <NuxtLink to="/admin/expired" class="text-sm text-[#8B0101] hover:underline font-medium">View All</NuxtLink>
+                <NuxtLink to="/admin/products?expiredFilter=expired" class="text-sm text-[#8B0101] hover:underline font-medium">View All</NuxtLink>
               </div>
               <div class="space-y-4">
-                <div v-for="product in expiringSoonProducts" :key="product.id" class="flex items-center gap-3">
+                <NuxtLink
+                  v-for="product in expiringSoonProducts.slice(0, 2)"
+                  :key="product.id"
+                  to="/admin/products?expiredFilter=expired"
+                  class="flex items-center gap-3 rounded-lg p-2 -m-2 hover:bg-gray-50 transition"
+                >
                   <span class="text-3xl">{{ product.img }}</span>
                   <div class="flex-1">
                     <p class="text-sm font-medium text-gray-900">{{ product.name }}</p>
@@ -170,7 +211,7 @@ const barHeight = (value: number) => {
                   </div>
                   <p class="text-sm font-semibold text-orange-600">{{ product.quantity }}</p>
                   <p class="text-xs text-gray-500">Quantity</p>
-                </div>
+                </NuxtLink>
               </div>
             </div>
 
@@ -183,13 +224,18 @@ const barHeight = (value: number) => {
                 <NuxtLink to="/admin/products" class="text-sm text-[#8B0101] hover:underline font-medium">View All</NuxtLink>
               </div>
               <div class="space-y-4">
-                <div v-for="product in outOfStockProducts" :key="product.id" class="flex items-center gap-3">
+                <NuxtLink
+                  v-for="product in outOfStockProducts.slice(0, 2)"
+                  :key="product.id"
+                  to="/admin/products"
+                  class="flex items-center gap-3 rounded-lg p-2 -m-2 hover:bg-gray-50 transition"
+                >
                   <span class="text-3xl">{{ product.img }}</span>
                   <div class="flex-1">
                     <p class="text-sm font-medium text-gray-900">{{ product.name }}</p>
                     <p class="text-xs text-gray-500">ID: {{ product.id }}</p>
                   </div>
-                </div>
+                </NuxtLink>
               </div>
             </div>
 
@@ -202,13 +248,18 @@ const barHeight = (value: number) => {
                 <NuxtLink to="/admin/products" class="text-sm text-[#8B0101] hover:underline font-medium">View All</NuxtLink>
               </div>
               <div class="space-y-4">
-                <div v-for="product in productOverview" :key="product.id" class="flex items-center gap-3">
+                <NuxtLink
+                  v-for="product in productOverview.slice(0, 2)"
+                  :key="product.id"
+                  to="/admin/products"
+                  class="flex items-center gap-3 rounded-lg p-2 -m-2 hover:bg-gray-50 transition"
+                >
                   <span class="text-3xl">{{ product.img }}</span>
                   <div class="flex-1">
                     <p class="text-sm font-medium text-gray-900">{{ product.name }}</p>
                     <p class="text-xs text-gray-500">ID: {{ product.id }}</p>
                   </div>
-                </div>
+                </NuxtLink>
               </div>
             </div>
           </div>

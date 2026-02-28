@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, onMounted, watch } from "vue";
 import { useToast } from "~/composables/useToast";
 import { useRoute } from "vue-router";
 import { useStockData } from "~/composables/useStockData";
@@ -11,27 +11,36 @@ const { stockEntries, updateStockEntry } = useStockData();
 const { options } = useOptionsData();
 
 const searchQuery = ref("");
-const selectedWarehouse = ref("All");
-const selectedStore = ref("All");
-const selectedProduct = ref("All");
+const selectedCategory = ref("All");
+const stockFilter = ref<"all" | "low">("all");
 const currentPage = ref(1);
 const rowsPerPage = ref(10);
 
-const warehouses = computed(() => options.value.warehouses);
-const stores = computed(() => options.value.stores);
+// Apply stock filter from query when coming from dashboard (e.g. ?stockFilter=low)
+function syncStockFilterFromRoute() {
+  const query = route.query.stockFilter as string;
+  if (query === "low") stockFilter.value = "low";
+}
+onMounted(syncStockFilterFromRoute);
+watch(() => route.query.stockFilter, syncStockFilterFromRoute);
+
+const categories = computed(() => options.value.categories);
+const categoryOptions = computed(() => options.value.categoryOptions);
 const productOptions = computed(() => options.value.productOptions);
+
+function isLowStock(entry: { qty: number; threshold: number }): boolean {
+  return entry.qty < entry.threshold;
+}
 
 const filteredEntries = computed(() => {
   return stockEntries.value.filter((entry) => {
-    const matchWarehouse = selectedWarehouse.value === "All" || entry.warehouse === selectedWarehouse.value;
-    const matchStore = selectedStore.value === "All" || entry.store === selectedStore.value;
-    const matchProduct = selectedProduct.value === "All" || entry.productName === selectedProduct.value;
+    const matchCategory = selectedCategory.value === "All" || entry.category === selectedCategory.value;
     const matchSearch =
       searchQuery.value === "" ||
-      entry.productName.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      entry.warehouse.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      entry.store.toLowerCase().includes(searchQuery.value.toLowerCase());
-    return matchWarehouse && matchStore && matchProduct && matchSearch;
+      entry.productName.toLowerCase().includes(searchQuery.value.toLowerCase());
+    const matchStock =
+      stockFilter.value === "all" || (stockFilter.value === "low" && isLowStock(entry));
+    return matchCategory && matchSearch && matchStock;
   });
 });
 
@@ -58,23 +67,21 @@ const visiblePageNumbers = computed(() => {
 const showEditStockModal = ref(false);
 const editingEntryId = ref<number | null>(null);
 const editStockForm = ref({
-  warehouse: "",
-  store: "",
   productName: "",
   date: "",
   person: "",
   qty: 0,
+  threshold: 0,
 });
 
 const openEditStock = (entry: typeof stockEntries.value[0]) => {
   editingEntryId.value = entry.id;
   editStockForm.value = {
-    warehouse: entry.warehouse,
-    store: entry.store,
     productName: entry.productName,
     date: entry.date,
     person: entry.person,
     qty: entry.qty,
+    threshold: entry.threshold,
   };
   showEditStockModal.value = true;
 };
@@ -91,19 +98,17 @@ const submitEditStock = () => {
     return;
   }
   updateStockEntry(editingEntryId.value, {
-    warehouse: editStockForm.value.warehouse,
-    store: editStockForm.value.store,
     productName: editStockForm.value.productName.trim(),
     date: editStockForm.value.date,
     person: editStockForm.value.person,
     qty: editStockForm.value.qty,
+    threshold: editStockForm.value.threshold,
   });
   success("Stock entry updated successfully!");
   closeEditStockModal();
 };
 
 const handleEdit = (entry: typeof stockEntries.value[0]) => { openEditStock(entry); };
-const handleDelete = (id: number) => { error(`Stock entry ${id} deleted`); };
 </script>
 
 <template>
@@ -145,34 +150,26 @@ const handleDelete = (id: number) => { error(`Stock entry ${id} deleted`); };
                 class="bg-transparent outline-none text-sm flex-1"
               />
             </div>
-            <div class="flex items-center gap-4">
-              <div class="flex items-center gap-2">
-                <label class="text-sm font-medium text-gray-700">Warehouse</label>
-                <select
-                  v-model="selectedWarehouse"
-                  class="px-4 py-2 border border-gray-300 rounded-lg text-sm bg-white text-gray-700 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-[#8B0101] focus:ring-offset-0 cursor-pointer transition"
-                >
-                  <option v-for="w in warehouses" :key="w" :value="w">{{ w }}</option>
-                </select>
-              </div>
-              <div class="flex items-center gap-2">
-                <label class="text-sm font-medium text-gray-700">Store</label>
-                <select
-                  v-model="selectedStore"
-                  class="px-4 py-2 border border-gray-300 rounded-lg text-sm bg-white text-gray-700 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-[#8B0101] focus:ring-offset-0 cursor-pointer transition"
-                >
-                  <option v-for="s in stores" :key="s" :value="s">{{ s }}</option>
-                </select>
-              </div>
-              <div class="flex items-center gap-2">
-                <label class="text-sm font-medium text-gray-700">Product</label>
-                <select
-                  v-model="selectedProduct"
-                  class="px-4 py-2 border border-gray-300 rounded-lg text-sm bg-white text-gray-700 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-[#8B0101] focus:ring-offset-0 cursor-pointer transition"
-                >
-                  <option v-for="p in productOptions" :key="p" :value="p">{{ p }}</option>
-                </select>
-              </div>
+<div class="flex items-center gap-4">
+            <div class="flex items-center gap-2">
+              <label class="text-sm font-medium text-gray-700">Category</label>
+              <select
+                v-model="selectedCategory"
+                class="px-4 py-2 border border-gray-300 rounded-lg text-sm bg-white text-gray-700 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-[#8B0101] focus:ring-offset-0 cursor-pointer transition"
+              >
+                <option v-for="c in categories" :key="c" :value="c">{{ c }}</option>
+              </select>
+            </div>
+            <div class="flex items-center gap-2">
+              <label class="text-sm font-medium text-gray-700">Stock</label>
+              <select
+                v-model="stockFilter"
+                class="px-4 py-2 border border-gray-300 rounded-lg text-sm bg-white text-gray-700 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-[#8B0101] focus:ring-offset-0 cursor-pointer transition"
+              >
+                <option value="all">All</option>
+                <option value="low">Low stock only</option>
+              </select>
+            </div>
             </div>
           </div>
         </div>
@@ -186,12 +183,12 @@ const handleDelete = (id: number) => { error(`Stock entry ${id} deleted`); };
                   <th class="px-6 py-4 text-center">
                     <input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-[#8B0101] focus:ring-[#8B0101] cursor-pointer" />
                   </th>
-                  <th class="px-6 py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">Warehouse</th>
-                  <th class="px-6 py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">Store</th>
                   <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Product Name</th>
                   <th class="px-6 py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">Date ⬆</th>
                   <th class="px-6 py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">Person</th>
                   <th class="px-6 py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">Qty</th>
+                  <th class="px-6 py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">Threshold</th>
+                  <th class="px-6 py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">Status</th>
                   <th class="px-6 py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">Actions</th>
                 </tr>
               </thead>
@@ -204,8 +201,6 @@ const handleDelete = (id: number) => { error(`Stock entry ${id} deleted`); };
                   <td class="px-6 py-4 text-center">
                     <input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-[#8B0101] focus:ring-[#8B0101] cursor-pointer" />
                   </td>
-                  <td class="px-6 py-4 text-sm text-gray-600 text-center">{{ entry.warehouse }}</td>
-                  <td class="px-6 py-4 text-sm text-gray-600 text-center">{{ entry.store }}</td>
                   <td class="px-6 py-4 text-left">
                     <div class="flex items-center justify-start gap-2">
                       <div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center shrink-0 text-gray-500">
@@ -224,6 +219,17 @@ const handleDelete = (id: number) => { error(`Stock entry ${id} deleted`); };
                     </div>
                   </td>
                   <td class="px-6 py-4 text-sm font-medium text-gray-900 text-center">{{ entry.qty }}</td>
+                  <td class="px-6 py-4 text-sm text-gray-600 text-center">{{ entry.threshold }}</td>
+                  <td class="px-6 py-4 text-center">
+                    <span
+                      :class="[
+                        'inline-flex px-2 py-0.5 text-[10px] font-medium rounded border-2',
+                        isLowStock(entry) ? 'border-red-600 bg-red-500 text-white' : 'border-green-600 bg-green-500 text-white',
+                      ]"
+                    >
+                      {{ isLowStock(entry) ? 'Low' : 'OK' }}
+                    </span>
+                  </td>
                   <td class="px-6 py-4 text-center">
                     <div class="flex items-center justify-center gap-2">
                       <button
@@ -232,13 +238,6 @@ const handleDelete = (id: number) => { error(`Stock entry ${id} deleted`); };
                         title="Edit"
                       >
                         <Icon name="mdi:pencil" class="w-5 h-5" />
-                      </button>
-                      <button
-                        @click="handleDelete(entry.id)"
-                        class="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded transition"
-                        title="Delete"
-                      >
-                        <Icon name="mdi:trash-can" class="w-5 h-5" />
                       </button>
                     </div>
                   </td>
@@ -327,39 +326,29 @@ const handleDelete = (id: number) => { error(`Stock entry ${id} deleted`); };
             </div>
             <form @submit.prevent="submitEditStock" class="flex flex-col flex-1 min-h-0">
               <div class="p-6 space-y-4 overflow-y-auto">
-                <div class="grid grid-cols-2 gap-4">
-                  <div>
-                    <label class="block text-xs font-medium text-gray-700 mb-1">Warehouse</label>
-                    <select v-model="editStockForm.warehouse" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-[#8B0101] focus:border-transparent">
-                      <option v-for="w in warehouses.filter((x) => x !== 'All')" :key="w" :value="w">{{ w }}</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label class="block text-xs font-medium text-gray-700 mb-1">Store</label>
-                    <select v-model="editStockForm.store" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-[#8B0101] focus:border-transparent">
-                      <option v-for="s in stores.filter((x) => x !== 'All')" :key="s" :value="s">{{ s }}</option>
-                    </select>
-                  </div>
-                </div>
                 <div>
-                  <label class="block text-xs font-medium text-gray-700 mb-1">Product Name <span class="text-red-500">*</span></label>
-                  <select v-model="editStockForm.productName" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-[#8B0101] focus:border-transparent">
-                    <option v-for="p in productOptions.filter((x) => x !== 'All')" :key="p" :value="p">{{ p }}</option>
-                  </select>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">Product Name</label>
+                  <input :value="editStockForm.productName" type="text" readonly class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg bg-gray-50 text-gray-700 cursor-not-allowed" tabindex="-1" />
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                   <div>
                     <label class="block text-xs font-medium text-gray-700 mb-1">Date</label>
-                    <input v-model="editStockForm.date" type="text" placeholder="e.g. 24 Dec 2024" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B0101] focus:border-transparent" />
+                    <input :value="editStockForm.date" type="text" readonly class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg bg-gray-50 text-gray-600 cursor-not-allowed" tabindex="-1" />
                   </div>
                   <div>
                     <label class="block text-xs font-medium text-gray-700 mb-1">Person</label>
-                    <input v-model="editStockForm.person" type="text" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B0101] focus:border-transparent" />
+                    <input :value="editStockForm.person" type="text" readonly class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg bg-gray-50 text-gray-600 cursor-not-allowed" tabindex="-1" />
                   </div>
                 </div>
-                <div>
-                  <label class="block text-xs font-medium text-gray-700 mb-1">Quantity <span class="text-red-500">*</span></label>
-                  <input v-model.number="editStockForm.qty" type="number" min="0" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B0101] focus:border-transparent" />
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-medium text-gray-700 mb-1">Quantity <span class="text-red-500">*</span></label>
+                    <input v-model.number="editStockForm.qty" type="number" min="0" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B0101] focus:border-transparent" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-medium text-gray-700 mb-1">Threshold</label>
+                    <input v-model.number="editStockForm.threshold" type="number" min="0" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B0101] focus:border-transparent" />
+                  </div>
                 </div>
               </div>
               <div class="px-6 py-4 border-t border-gray-200 flex justify-end gap-3 bg-gray-50 shrink-0">
