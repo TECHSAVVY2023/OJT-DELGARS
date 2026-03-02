@@ -79,7 +79,7 @@ const emit = defineEmits<{
           </div>
         </div>
         <div
-          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6"
+          class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6"
         >
           <ClientProductCard
             v-for="(product, idx) in items"

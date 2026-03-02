@@ -23,12 +23,14 @@ function catalogCategoryUrl(cat: { name: string }) {
 <template>
   <section class="bg-gray-50 py-20">
     <div class="max-w-384 mx-auto px-3 sm:px-4 lg:px-6">
-      <div class="mb-12">
+      <div class="mb-10 md:mb-12">
         <div class="flex items-center gap-3 mb-2">
           <div class="w-2 h-10 bg-[#8B0101] rounded-md" />
           <span class="text-[#8B0101] font-semibold text-xl">{{ label }}</span>
         </div>
-        <h2 class="text-4xl font-bold text-gray-900">{{ sectionTitle }}</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
+          {{ sectionTitle }}
+        </h2>
       </div>
 
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">

@@ -2,12 +2,14 @@
 import { ref, computed, watch } from "vue";
 import catalogData from "~/data/catalog.json";
 import { useToast } from "~/composables/useToast";
+import { useCart } from "~/composables/useCart";
 import { getCategoryClass, categoryFromQuery } from "~/composables/useCategoryStyle";
 import type { ProductInfoWithContext } from "~/types/client";
 
 const data = catalogData as typeof catalogData;
 const route = useRoute();
 const { info: toastInfo } = useToast();
+const { addItem, totalCount } = useCart();
 
 function underConstruction() {
   toastInfo("Under construction");
@@ -49,11 +51,27 @@ function openProductInfo(product: ProductInfoWithContext) {
 function onProductInfoAddToCart(quantity: number) {
   const p = productInfoModalProduct.value;
   if (!p) return;
+
+  // Add to shared cart
+  if (p.id != null) {
+    addItem(
+      {
+        id: p.id,
+        name: p.name,
+        image: p.image,
+        price: p.price,
+      },
+      quantity,
+    );
+  }
+
+  // Keep local quantity in sync for catalog UI
   if (p._newlyIndex !== undefined) {
     setQuantityNewly(p._newlyIndex, getQuantityNewly(p._newlyIndex) + quantity);
   } else if (p.id != null) {
     setQuantity(p.id, getQuantity(p.id) + quantity);
   }
+
   productInfoModalOpen.value = false;
 }
 
@@ -66,7 +84,7 @@ function setQuantity(productId: number, qty: number) {
     (p: { id: number; stock?: number }) => p.id === productId
   );
   const max = product != null && typeof product.stock === "number" ? Number(product.stock) : 999;
-  const next = Math.max(0, Math.min(max, qty));
+  const next = Math.max(1, Math.min(max, qty));
   productQuantities.value = { ...productQuantities.value, [productId]: next };
 }
 
@@ -162,6 +180,17 @@ watch(
     selectedCategory.value = categoryFromQuery(category);
   }
 );
+
+// Initialize default quantities to 1 for all main catalog products
+if (allProducts?.length) {
+  const initial: Record<number, number> = {};
+  for (const p of allProducts as Array<{ id: number }>) {
+    if (p.id != null) {
+      initial[p.id] = 1;
+    }
+  }
+  productQuantities.value = initial;
+}
 </script>
 
 <template>
@@ -227,7 +256,7 @@ watch(
             @search="underConstruction"
           />
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+          <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
             <ClientProductCard
               v-for="product in paginatedProducts"
               :key="product.id"
@@ -253,6 +282,7 @@ watch(
               }"
               @update:quantity="setQuantity(product.id, $event)"
               @update:price-type="setPriceType(product.id, $event)"
+              @add-to-cart="(qty) => addItem({ id: product.id, name: product.name, image: product.image, price: product.price }, qty)"
               @open-info="openProductInfo(product)"
             />
           </div>
@@ -300,6 +330,6 @@ watch(
     </div>
 
     <ClientFooter />
-    <ClientFab />
+    <ClientFab :cart-count="totalCount" @open-cart="navigateTo('/client/cart')" />
   </div>
 </template>

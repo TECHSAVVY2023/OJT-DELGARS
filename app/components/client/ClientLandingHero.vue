@@ -21,7 +21,7 @@ defineProps<{
     >
       <div class="max-w-xl space-y-6 text-left animate-fade-in-left">
         <h1
-          class="hero-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold leading-tight tracking-tight"
+          class="hero-title text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-tight tracking-tight"
         >
           <span
             class="inline-block animate-slide-in-down mr-1"
@@ -72,7 +72,7 @@ defineProps<{
       </div>
 
       <div
-        class="hero-circle-wrapper relative z-10 flex items-center justify-center w-full max-w-[min(58vw,220px)] aspect-square md:max-w-[min(48vw,440px)] md:-ml-10 lg:-ml-14 animate-bounce-slow"
+        class="hero-circle-wrapper relative z-10 flex items-center justify-center w-full max-w-[min(58vw,200px)] aspect-square md:max-w-[min(40vw,360px)] md:-ml-8 lg:-ml-10 animate-bounce-slow"
       >
         <div
           class="hero-circle-outer w-full h-full rounded-full border-10 md:border-[14px] border-white bg-[#ADD8E6]/95 shadow-2xl flex items-center justify-center p-4 md:p-6 animate-pulse-glow"

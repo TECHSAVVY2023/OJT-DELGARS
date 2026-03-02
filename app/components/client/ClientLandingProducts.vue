@@ -28,6 +28,19 @@ defineProps<{
 const emit = defineEmits<{
   "update:quantity": [id: number, value: number];
   "update:priceType": [id: number, value: "retail" | "wholesale"];
+  "add-to-cart": [
+    product: {
+      id: number;
+      category: string;
+      categoryClass: string;
+      subcategory: string;
+      name: string;
+      price: string;
+      stock: number;
+      image: string;
+    },
+    quantity: number,
+  ];
   search: [];
 }>();
 </script>
@@ -35,12 +48,14 @@ const emit = defineEmits<{
 <template>
   <section id="catalog" class="py-20 bg-white">
     <div class="max-w-384 mx-auto px-3 sm:px-4 lg:px-6">
-      <div class="mb-12">
+      <div class="mb-10 md:mb-12">
         <div class="flex items-center gap-3 mb-2">
           <div class="w-2 h-10 bg-[#8B0101] rounded-md" />
           <span class="text-[#8B0101] font-semibold text-xl">{{ productsLabel }}</span>
         </div>
-        <h2 class="text-4xl font-bold text-gray-900 mb-6">{{ sectionTitle }}</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 md:mb-6">
+          {{ sectionTitle }}
+        </h2>
 
         <div class="flex gap-4 max-w-lg">
           <input
@@ -58,7 +73,7 @@ const emit = defineEmits<{
         </div>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+      <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         <ClientProductCard
           v-for="product in products"
           :key="product.id"
@@ -79,6 +94,7 @@ const emit = defineEmits<{
           :labels="labels"
           @update:quantity="emit('update:quantity', product.id, $event)"
           @update:price-type="emit('update:priceType', product.id, $event)"
+          @add-to-cart="(qty) => emit('add-to-cart', product, qty)"
         />
       </div>
 

@@ -3,12 +3,25 @@ import { ref } from "vue";
 import { useLandingData } from "~/composables/useLandingData";
 import { useToast } from "~/composables/useToast";
 
+const { cartCount } = defineProps<{
+  cartCount?: number;
+}>();
+
+const emit = defineEmits<{
+  "open-cart": [];
+}>();
+
 const { fab } = useLandingData();
 const { info: toastInfo } = useToast();
 const fabOpen = ref(false);
 
 const toggleFab = () => {
   fabOpen.value = !fabOpen.value;
+};
+
+const handleCartClick = () => {
+  fabOpen.value = false;
+  emit("open-cart");
 };
 
 function underConstruction() {
@@ -44,9 +57,15 @@ const handleLogout = () => {
           type="button"
           class="w-14 h-14 bg-blue-500 text-white rounded-full shadow-lg hover:bg-blue-600 transition-all duration-200 flex items-center justify-center hover:scale-110 transform origin-bottom-right"
           :title="fab.cartTitle"
-          @click="underConstruction"
+          @click="handleCartClick"
         >
           <Icon name="mdi:cart" class="w-6 h-6" />
+          <span
+            v-if="cartCount && cartCount > 0"
+            class="absolute -top-1 -right-1 min-w-[1.5rem] h-6 px-1 rounded-full bg-red-600 text-white text-xs font-semibold flex items-center justify-center shadow"
+          >
+            {{ cartCount }}
+          </span>
         </button>
 
         <!-- Profile Icon -->

@@ -2,9 +2,6 @@
 import { useToast } from "~/composables/useToast";
 
 const { info: toastInfo } = useToast();
-function underConstruction() {
-  toastInfo("Under construction");
-}
 
 defineProps<{
   product: {
@@ -34,6 +31,7 @@ const emit = defineEmits<{
   "update:quantity": [value: number];
   "update:priceType": [value: "retail" | "wholesale"];
   openInfo: [];
+  "add-to-cart": [quantity: number];
 }>();
 </script>
 
@@ -73,15 +71,15 @@ const emit = defineEmits<{
       <img
         :src="product.image"
         :alt="product.name"
-        class="w-full h-36 sm:h-44 lg:h-48 object-cover"
+        class="w-full h-28 sm:h-40 lg:h-48 object-cover"
       />
     </div>
-    <div class="p-3 sm:p-4 flex flex-col flex-1 min-h-0">
+    <div class="p-2 sm:p-4 flex flex-col flex-1 min-h-0">
       <p class="text-[10px] sm:text-xs text-gray-500 mb-0.5 sm:mb-1">
         {{ product.subcategory ?? product.category }}
       </p>
       <h3
-        class="font-semibold text-sm sm:text-base text-gray-900 mb-2 sm:mb-3 whitespace-nowrap overflow-hidden text-ellipsis cursor-pointer hover:text-[#8B0101] transition"
+        class="font-semibold text-xs sm:text-base text-gray-900 mb-1.5 sm:mb-3 whitespace-nowrap overflow-hidden text-ellipsis cursor-pointer hover:text-[#8B0101] transition"
         :title="product.name"
         @click="emit('openInfo')"
       >
@@ -124,7 +122,7 @@ const emit = defineEmits<{
         <button
           type="button"
           class="w-7 h-7 sm:w-8 sm:h-8 bg-blue-400 text-white rounded hover:bg-blue-500 transition flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
-          :disabled="quantity <= 0"
+          :disabled="quantity <= 1"
           aria-label="Decrease quantity"
           @click="emit('update:quantity', quantity - 1)"
         >
@@ -152,7 +150,16 @@ const emit = defineEmits<{
           type="button"
           class="px-2 py-1.5 sm:px-3 sm:py-2 bg-[#8B0101] text-white rounded text-xs sm:text-sm font-semibold hover:bg-[#6B0001] transition flex items-center gap-1"
           :aria-label="`${labels.addLabel} ${product.name}`"
-          @click="underConstruction"
+          @click="
+            () => {
+              if (quantity <= 0) {
+                toastInfo('Please select a quantity first.');
+                return;
+              }
+              emit('add-to-cart', quantity);
+              toastInfo('Added to cart.');
+            }
+          "
         >
           <Icon name="mdi:cart" class="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           {{ labels.addLabel }}

@@ -35,7 +35,7 @@ const emit = defineEmits<{
 
 const activeTab = ref<"description" | "additional" | "vendor">("description");
 const selectedWeight = ref("60g");
-const modalQuantity = ref(0);
+const modalQuantity = ref(1);
 
 const weightOptions = ["50g", "60g", "80g", "100g", "150g"];
 
@@ -69,7 +69,7 @@ const close = () => {
 const onAddToCart = () => {
   if (modalQuantity.value > 0) {
     emit("add-to-cart", modalQuantity.value);
-    modalQuantity.value = 0;
+    modalQuantity.value = 1;
     close();
   }
 };
@@ -88,7 +88,7 @@ watch(
         window.addEventListener("keydown", onKeyDown);
         activeTab.value = "description";
         selectedImage.value = 0;
-        modalQuantity.value = 0;
+        modalQuantity.value = 1;
       }
     }
   }
@@ -204,16 +204,16 @@ onBeforeUnmount(() => {
                     <button
                       type="button"
                       class="w-10 h-10 flex items-center justify-center bg-blue-400 text-white hover:bg-blue-500 transition disabled:opacity-50"
-                      :disabled="modalQuantity <= 0"
+                      :disabled="modalQuantity <= 1"
                       aria-label="Decrease quantity"
-                      @click="modalQuantity = Math.max(0, modalQuantity - 1)"
+                      @click="modalQuantity = Math.max(1, modalQuantity - 1)"
                     >
                       <Icon name="mdi:minus" class="w-5 h-5" />
                     </button>
                     <input
                       v-model.number="modalQuantity"
                       type="number"
-                      min="0"
+                      min="1"
                       :max="maxQuantity"
                       aria-label="Quantity to add"
                       class="w-14 h-10 text-center text-gray-900 border-0 border-x border-gray-200 focus:outline-none focus:ring-0"

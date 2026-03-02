@@ -23,9 +23,9 @@ const emit = defineEmits<{ send: [] }>();
 <template>
   <section id="contact" class="bg-white py-20">
     <div class="max-w-384 mx-auto px-3 sm:px-4 lg:px-6">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
         <div>
-          <h2 class="text-4xl font-bold text-gray-900 mb-4">{{ leftTitle }}</h2>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{{ leftTitle }}</h2>
           <p class="text-gray-600 mb-8">{{ leftSubtitle }}</p>
           <iframe
             :src="`https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&z=17&output=embed`"
@@ -40,7 +40,7 @@ const emit = defineEmits<{ send: [] }>();
         </div>
 
         <div>
-          <h2 class="text-4xl font-bold text-[#8B0101] mb-4">{{ rightTitle }}</h2>
+          <h2 class="text-3xl md:text-4xl font-bold text-[#8B0101] mb-4">{{ rightTitle }}</h2>
           <p class="text-gray-600 mb-8">{{ rightSubtitle }}</p>
           <form class="space-y-4" @submit.prevent="emit('send')">
             <div class="grid grid-cols-2 gap-4">

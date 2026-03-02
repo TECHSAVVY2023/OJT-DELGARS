@@ -3,12 +3,14 @@ import { usePageLoading } from "~/composables/usePageLoading";
 import { useLandingData } from "~/composables/useLandingData";
 import { useClientLoginModal } from "~/composables/useClientLoginModal";
 import { useToast } from "~/composables/useToast";
-import { ref } from "vue";
+import { useCart } from "~/composables/useCart";
+import { ref, onMounted } from "vue";
 
 const { stopLoading } = usePageLoading();
 const { hero, trust, browseCategories, catalog, about, contact } = useLandingData();
 const { showLoginModal, closeLogin } = useClientLoginModal();
 const { success, info: toastInfo } = useToast();
+const { addItem, totalCount } = useCart();
 
 function underConstruction() {
   toastInfo("Under construction");
@@ -33,10 +35,10 @@ function getQuantity(productId: number) {
 
 function setQuantity(productId: number, qty: number) {
   const product = catalog.value.products.find(
-    (p: { id: number; stock: number }) => p.id === productId
+    (p: { id: number; stock: number }) => p.id === productId,
   );
   const max = product ? product.stock : 999;
-  const next = Math.max(0, Math.min(max, qty));
+  const next = Math.max(1, Math.min(max, qty));
   productQuantities.value = { ...productQuantities.value, [productId]: next };
 }
 
@@ -44,7 +46,28 @@ function setPriceType(productId: number, type: "retail" | "wholesale") {
   productPriceType.value = { ...productPriceType.value, [productId]: type };
 }
 
+function handleAddToCart(
+  product: {
+    id: number;
+    name: string;
+    image: string;
+    price: string;
+  },
+  quantity: number,
+) {
+  addItem(product, quantity);
+}
+
 onMounted(() => {
+  // Initialize all product quantities to 1 by default
+  if (catalog.value?.products) {
+    const initial: Record<number, number> = {};
+    for (const p of catalog.value.products as Array<{ id: number }>) {
+      initial[p.id] = 1;
+    }
+    productQuantities.value = initial;
+  }
+
   setTimeout(() => {
     stopLoading();
   }, 300);
@@ -92,6 +115,7 @@ onMounted(() => {
       @update:quantity="(id, value) => setQuantity(id, value)"
       @update:price-type="(id, type) => setPriceType(id, type)"
       @search="underConstruction"
+      @add-to-cart="handleAddToCart"
     />
 
     <ClientAboutSection
@@ -116,7 +140,7 @@ onMounted(() => {
     />
 
     <ClientFooter />
-    <ClientFab />
+    <ClientFab :cart-count="totalCount" @open-cart="navigateTo('/client/cart')" />
 
     <ClientLoginModal
       :model-value="showLoginModal"
