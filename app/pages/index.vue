@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
-
-onMounted(() => {
-  navigateTo("/client/landing");
-});
+navigateTo("/client/landing");
 </script>
+
+<template>
+  <div></div>
+</template>
