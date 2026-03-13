@@ -2,6 +2,9 @@
 import { ref, computed } from "vue";
 import { useRoute } from "vue-router";
 import { useToast } from "~/composables/useToast";
+import AdminSidebar from "~/components/admin/AdminSidebar.vue";
+import AdminHeader from "~/components/admin/AdminHeader.vue";
+import UnderConstruction from "~/components/UnderConstruction.vue";
 
 const route = useRoute();
 const { success } = useToast();
