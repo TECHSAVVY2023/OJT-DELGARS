@@ -1,40 +1,3 @@
-<script setup lang="ts">
-import { useToast } from "~/composables/useToast";
-import { useCreateProduct } from "~/composables/useCreateProduct";
-
-const { success, error, info } = useToast();
-
-const {
-  formData,
-  customFields,
-  stores,
-  categories,
-  brands,
-  units,
-  sellingTypes,
-  taxTypes,
-  discountTypes,
-  barcodeSymbologies,
-  handleCancel,
-  handleAddProduct,
-  handleGenerateSKU,
-  handleGenerateItemCode,
-} = useCreateProduct();
-
-const submitCreateProduct = () => {
-  handleAddProduct({ success, error });
-};
-
-const onGenerateSKU = () => {
-  const sku = handleGenerateSKU();
-  info(`SKU generated: ${sku}`);
-};
-
-const onGenerateItemCode = () => {
-  const itemCode = handleGenerateItemCode();
-  info(`Item Code generated: ${itemCode}`);
-};
-</script>
 
 <template>
   <div class="flex h-screen bg-gray-50" style="font-family: 'Nunito Sans', sans-serif">
@@ -100,3 +63,41 @@ const onGenerateItemCode = () => {
                 
 <style scoped>
 </style>
+
+<script setup lang="ts">
+import { useToast } from "~/composables/useToast";
+import { useCreateProduct } from "~/composables/useCreateProduct";
+
+const { success, error, info } = useToast();
+
+const {
+  formData,
+  customFields,
+  stores,
+  categories,
+  brands,
+  units,
+  sellingTypes,
+  taxTypes,
+  discountTypes,
+  barcodeSymbologies,
+  handleCancel,
+  handleAddProduct,
+  handleGenerateSKU,
+  handleGenerateItemCode,
+} = useCreateProduct();
+
+const submitCreateProduct = () => {
+  handleAddProduct({ success, error });
+};
+
+const onGenerateSKU = () => {
+  const sku = handleGenerateSKU();
+  info(`SKU generated: ${sku}`);
+};
+
+const onGenerateItemCode = () => {
+  const itemCode = handleGenerateItemCode();
+  info(`Item Code generated: ${itemCode}`);
+};
+</script>

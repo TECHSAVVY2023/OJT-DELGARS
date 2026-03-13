@@ -1,24 +1,3 @@
-<script setup lang="ts">
-import { useCategoryPage } from "~/composables/useCategoryPage";
-
-const {
-  searchQuery,
-  statusFilter,
-  currentPage,
-  rowsPerPage,
-  paginatedItems,
-  totalPages,
-  visiblePageNumbers,
-  showAddCategoryModal,
-  newCategory,
-  handleAddCategory,
-  handleEdit,
-  handleArchive,
-  handleDelete,
-  closeAddCategoryModal,
-  submitAddCategory,
-} = useCategoryPage();
-</script>
 
 <template>
   <div class="flex h-screen bg-gray-50" style="font-family: 'Nunito Sans', sans-serif">
@@ -102,3 +81,26 @@ const {
   opacity: 0;
 }
 </style>
+
+<script setup lang="ts">
+import { useCategoryPage } from "~/composables/useCategoryPage";
+
+const {
+  searchQuery,
+  statusFilter,
+  currentPage,
+  rowsPerPage,
+  paginatedItems,
+  totalPages,
+  visiblePageNumbers,
+  showAddCategoryModal,
+  newCategory,
+  handleAddCategory,
+  handleEdit,
+  handleArchive,
+  handleDelete,
+  closeAddCategoryModal,
+  submitAddCategory,
+} = useCategoryPage();
+</script>
+

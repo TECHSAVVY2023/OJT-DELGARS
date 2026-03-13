@@ -1,31 +1,3 @@
-<script setup lang="ts">
-import { useToast } from '~/composables/useToast';
-import { useStockPage } from '~/composables/useStockPage';
-
-const { info } = useToast();
-const {
-  searchQuery,
-  selectedCategory,
-  stockFilter,
-  currentPage,
-  rowsPerPage,
-  categories,
-  isLowStock,
-  paginatedEntries,
-  totalPages,
-  visiblePageNumbers,
-  showEditStockModal,
-  editStockForm,
-  handleEdit,
-  closeEditStockModal,
-  submitEditStock,
-} = useStockPage();
-
-const exportPdf = () => info('Export to PDF triggered');
-const exportExcel = () => info('Export to Excel triggered');
-const printPage = () => info('Print triggered');
-const refreshPage = () => info('Refresh triggered');
-</script>
 
 <template>
   <div class="flex h-screen bg-gray-50" style="font-family: 'Nunito Sans', sans-serif">
@@ -90,3 +62,32 @@ const refreshPage = () => info('Refresh triggered');
   opacity: 0;
 }
 </style>
+
+<script setup lang="ts">
+import { useToast } from '~/composables/useToast';
+import { useStockPage } from '~/composables/useStockPage';
+
+const { info } = useToast();
+const {
+  searchQuery,
+  selectedCategory,
+  stockFilter,
+  currentPage,
+  rowsPerPage,
+  categories,
+  isLowStock,
+  paginatedEntries,
+  totalPages,
+  visiblePageNumbers,
+  showEditStockModal,
+  editStockForm,
+  handleEdit,
+  closeEditStockModal,
+  submitEditStock,
+} = useStockPage();
+
+const exportPdf = () => info('Export to PDF triggered');
+const exportExcel = () => info('Export to Excel triggered');
+const printPage = () => info('Print triggered');
+const refreshPage = () => info('Refresh triggered');
+</script>

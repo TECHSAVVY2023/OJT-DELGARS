@@ -1,36 +1,3 @@
-<script setup lang="ts">
-import { useActivityLogsPage } from '~/composables/useActivityLogsPage';
-
-const {
-  searchQuery,
-  typeFilter,
-  entityFilter,
-  currentPage,
-  rowsPerPage,
-  typeOptions,
-  entityOptions,
-  filteredLogs,
-  paginatedLogs,
-  totalPages,
-  visiblePageNumbers,
-  formatTimestamp,
-  typeBadgeClass,
-  entityLabel,
-} = useActivityLogsPage();
-
-const exportPdf = () => {
-  // hook for future real export action
-  console.info('Export to PDF triggered');
-};
-
-const exportExcel = () => {
-  console.info('Export to Excel triggered');
-};
-
-const refreshPage = () => {
-  console.info('Refresh triggered');
-};
-</script>
 
 <template>
   <div class="flex h-screen bg-gray-50" style="font-family: 'Nunito Sans', sans-serif">
@@ -73,4 +40,39 @@ const refreshPage = () => {
     </main>
   </div>
 </template>
+
+<script setup lang="ts">
+import { useActivityLogsPage } from '~/composables/useActivityLogsPage';
+
+const {
+  searchQuery,
+  typeFilter,
+  entityFilter,
+  currentPage,
+  rowsPerPage,
+  typeOptions,
+  entityOptions,
+  filteredLogs,
+  paginatedLogs,
+  totalPages,
+  visiblePageNumbers,
+  formatTimestamp,
+  typeBadgeClass,
+  entityLabel,
+} = useActivityLogsPage();
+
+const exportPdf = () => {
+  // hook for future real export action
+  console.info('Export to PDF triggered');
+};
+
+const exportExcel = () => {
+  console.info('Export to Excel triggered');
+};
+
+const refreshPage = () => {
+  console.info('Refresh triggered');
+};
+</script>
+
 
