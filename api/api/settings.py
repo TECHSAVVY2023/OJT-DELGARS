@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'delgar_api',
+    'landingPage',
     'rest_framework',
 ]
 
