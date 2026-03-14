@@ -40,7 +40,7 @@ function onNavLinkClick(link: { href: string }, e: MouseEvent) {
 <template>
   <!-- Navigation Bar - wider span, more spacing -->
   <nav class="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
-    <div class="max-w-[96rem] w-full mx-auto px-5 sm:px-6 lg:px-8 xl:px-12">
+    <div class="max-w-384 w-full mx-auto px-5 sm:px-6 lg:px-8 xl:px-12">
       <div class="flex items-center justify-between h-16">
         <!-- Logo - always links to landing -->
         <NuxtLink to="/client/landing" class="flex items-center gap-3">

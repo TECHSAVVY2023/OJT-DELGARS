@@ -15,7 +15,7 @@ function underConstruction() {
 
 <template>
   <div
-    class="bg-gradient-to-br from-blue-50 to-white rounded-lg sm:rounded-xl p-4 sm:p-6 border border-blue-100 overflow-hidden relative"
+    class="bg-linear-to-br from-blue-50 to-white rounded-lg sm:rounded-xl p-4 sm:p-6 border border-blue-100 overflow-hidden relative"
   >
     <div class="relative z-10">
       <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-2 sm:mb-4">

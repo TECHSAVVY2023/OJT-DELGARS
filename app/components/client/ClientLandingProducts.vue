@@ -41,6 +41,18 @@ const emit = defineEmits<{
     },
     quantity: number,
   ];
+  "open-info": [
+    product: {
+      id: number;
+      category: string;
+      categoryClass: string;
+      subcategory: string;
+      name: string;
+      price: string;
+      stock: number;
+      image: string;
+    },
+  ];
   search: [];
 }>();
 </script>
@@ -94,7 +106,8 @@ const emit = defineEmits<{
           :labels="labels"
           @update:quantity="emit('update:quantity', product.id, $event)"
           @update:price-type="emit('update:priceType', product.id, $event)"
-          @add-to-cart="(qty) => emit('add-to-cart', product, qty)"
+          @add-to-cart="(qty: number) => emit('add-to-cart', product, qty)"
+          @open-info="() => emit('open-info', product)"
         />
       </div>
 

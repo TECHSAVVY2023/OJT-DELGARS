@@ -1,198 +1,3 @@
-<script setup lang="ts">
-import { ref, computed, watch } from "vue";
-import catalogData from "~/data/catalog.json";
-import { useToast } from "~/composables/useToast";
-import { useCart } from "~/composables/useCart";
-import { getCategoryClass, categoryFromQuery } from "~/composables/useCategoryStyle";
-import type { ProductInfoWithContext } from "~/types/client";
-
-const data = catalogData as typeof catalogData;
-const route = useRoute();
-const { info: toastInfo } = useToast();
-const { addItem, totalCount } = useCart();
-
-function underConstruction() {
-  toastInfo("Under construction");
-}
-
-const selectedCategory = ref(categoryFromQuery(route.query.category as string));
-const priceRange = ref<[number, number]>([195, 500]);
-const selectedWeightRanges = ref<string[]>([]);
-const selectedCutTypes = ref<string[]>([]);
-const searchQuery = ref("");
-const currentPage = ref(1);
-const mobileFiltersOpen = ref(false);
-
-const categories = data.categories;
-const weightRanges = data.weightRanges;
-const cutTypes = data.cutTypes;
-const filters = data.filters;
-const searchSort = data.searchSort;
-const allProducts = data.products;
-const newProducts = data.newProducts;
-const deals = data.deals;
-const promoBanners = data.promoBanners;
-const newlyStocked = data.newlyStocked;
-const imageSection = data.imageSection;
-
-const productQuantities = ref<Record<number, number>>({});
-const newlyStockedQuantities = ref<Record<number, number>>({});
-const productPriceType = ref<Record<number, "retail" | "wholesale">>({});
-const newlyStockedPriceType = ref<Record<number, "retail" | "wholesale">>({});
-
-const productInfoModalOpen = ref(false);
-const productInfoModalProduct = ref<ProductInfoWithContext | null>(null);
-
-function openProductInfo(product: ProductInfoWithContext) {
-  productInfoModalProduct.value = product;
-  productInfoModalOpen.value = true;
-}
-
-function onProductInfoAddToCart(quantity: number) {
-  const p = productInfoModalProduct.value;
-  if (!p) return;
-
-  // Add to shared cart
-  if (p.id != null) {
-    addItem(
-      {
-        id: p.id,
-        name: p.name,
-        image: p.image,
-        price: p.price,
-      },
-      quantity,
-    );
-  }
-
-  // Keep local quantity in sync for catalog UI
-  if (p._newlyIndex !== undefined) {
-    setQuantityNewly(p._newlyIndex, getQuantityNewly(p._newlyIndex) + quantity);
-  } else if (p.id != null) {
-    setQuantity(p.id, getQuantity(p.id) + quantity);
-  }
-
-  productInfoModalOpen.value = false;
-}
-
-function getQuantity(productId: number) {
-  return productQuantities.value[productId] ?? 0;
-}
-
-function setQuantity(productId: number, qty: number) {
-  const product = allProducts.find(
-    (p: { id: number; stock?: number }) => p.id === productId
-  );
-  const max = product != null && typeof product.stock === "number" ? Number(product.stock) : 999;
-  const next = Math.max(1, Math.min(max, qty));
-  productQuantities.value = { ...productQuantities.value, [productId]: next };
-}
-
-const NEWLY_STOCKED_MAX_QTY = 99;
-function getQuantityNewly(index: number) {
-  return newlyStockedQuantities.value[index] ?? 0;
-}
-function setQuantityNewly(index: number, qty: number) {
-  const next = Math.max(0, Math.min(NEWLY_STOCKED_MAX_QTY, qty));
-  newlyStockedQuantities.value = { ...newlyStockedQuantities.value, [index]: next };
-}
-function getPriceTypeNewly(index: number): "retail" | "wholesale" {
-  return newlyStockedPriceType.value[index] ?? "retail";
-}
-function setPriceTypeNewly(index: number, type: "retail" | "wholesale") {
-  newlyStockedPriceType.value = { ...newlyStockedPriceType.value, [index]: type };
-}
-
-function getPriceType(productId: number): "retail" | "wholesale" {
-  return productPriceType.value[productId] ?? "retail";
-}
-
-function setPriceType(productId: number, type: "retail" | "wholesale") {
-  productPriceType.value = { ...productPriceType.value, [productId]: type };
-}
-
-const filteredProducts = computed(() => {
-  const low = priceRangeLow.value;
-  const high = priceRangeHigh.value;
-  return allProducts.filter((product: { category: string; name: string; price: number }) => {
-    const categoryMatch =
-      selectedCategory.value === "All" || product.category === selectedCategory.value;
-    const searchMatch = product.name
-      .toLowerCase()
-      .includes(searchQuery.value.toLowerCase());
-    const priceMatch = product.price >= low && product.price <= high;
-    return categoryMatch && searchMatch && priceMatch;
-  });
-});
-
-const itemsPerPage = 8;
-const paginatedProducts = computed(() => {
-  const start = (currentPage.value - 1) * itemsPerPage;
-  return filteredProducts.value.slice(start, start + itemsPerPage);
-});
-
-const totalPages = computed(() => {
-  return Math.ceil(filteredProducts.value.length / itemsPerPage) || 1;
-});
-
-function toggleWeightRange(range: string) {
-  const index = selectedWeightRanges.value.indexOf(range);
-  if (index > -1) {
-    selectedWeightRanges.value.splice(index, 1);
-  } else {
-    selectedWeightRanges.value.push(range);
-  }
-}
-
-function toggleCutType(type: string) {
-  const index = selectedCutTypes.value.indexOf(type);
-  if (index > -1) {
-    selectedCutTypes.value.splice(index, 1);
-  } else {
-    selectedCutTypes.value.push(type);
-  }
-}
-
-function clampPriceRange() {
-  const [a, b] = priceRange.value;
-  if (a != null && b != null && a > b) {
-    priceRange.value = [b, a];
-  }
-}
-
-function onPriceRangeUpdate(v: [number, number]) {
-  priceRange.value = [v[0], v[1]];
-  clampPriceRange();
-}
-
-const priceRangeLow = computed(() => Math.min(priceRange.value[0] ?? 0, priceRange.value[1] ?? 0));
-const priceRangeHigh = computed(() => Math.max(priceRange.value[0] ?? 0, priceRange.value[1] ?? 0));
-
-watch(totalPages, (pages) => {
-  if (currentPage.value > pages) {
-    currentPage.value = Math.max(1, pages);
-  }
-});
-
-watch(
-  () => route.query.category as string | undefined,
-  (category) => {
-    selectedCategory.value = categoryFromQuery(category);
-  }
-);
-
-// Initialize default quantities to 1 for all main catalog products
-if (allProducts?.length) {
-  const initial: Record<number, number> = {};
-  for (const p of allProducts as Array<{ id: number }>) {
-    if (p.id != null) {
-      initial[p.id] = 1;
-    }
-  }
-  productQuantities.value = initial;
-}
-</script>
-
 <template>
   <div class="min-h-screen bg-white">
     <ClientHeader />
@@ -205,11 +10,9 @@ if (allProducts?.length) {
         brandLabel: data.brandLabel,
         retailLabel: data.retailLabel,
         wholesaleLabel: data.wholesaleLabel,
-        addLabel: data.addLabel,
         inStockLabel: data.inStockLabel,
       }"
       @update:model-value="productInfoModalOpen = $event"
-      @add-to-cart="onProductInfoAddToCart"
     />
 
     <ClientNewsletterBanner
@@ -282,7 +85,7 @@ if (allProducts?.length) {
               }"
               @update:quantity="setQuantity(product.id, $event)"
               @update:price-type="setPriceType(product.id, $event)"
-              @add-to-cart="(qty) => addItem({ id: product.id, name: product.name, image: product.image, price: product.price }, qty)"
+              @add-to-cart="(qty: number) => addItem({ id: product.id, name: product.name, image: product.image, price: product.price }, qty)"
               @open-info="openProductInfo(product)"
             />
           </div>
@@ -330,6 +133,59 @@ if (allProducts?.length) {
     </div>
 
     <ClientFooter />
-    <ClientFab :cart-count="totalCount" @open-cart="navigateTo('/client/cart')" />
+    <ClientFab />
   </div>
 </template>
+
+<script setup lang="ts">
+import { useCatalogPage } from "~/composables/useCatalogPage";
+
+const {
+  data,
+  categories,
+  weightRanges,
+  cutTypes,
+  filters,
+  searchSort,
+  newProducts,
+  deals,
+  promoBanners,
+  newlyStocked,
+  imageSection,
+  selectedCategory,
+  priceRange,
+  selectedWeightRanges,
+  selectedCutTypes,
+  searchQuery,
+  currentPage,
+  mobileFiltersOpen,
+  productQuantities,
+  newlyStockedQuantities,
+  productPriceType,
+  newlyStockedPriceType,
+  productInfoModalOpen,
+  productInfoModalProduct,
+  addItem,
+  NEWLY_STOCKED_MAX_QTY,
+  getCategoryClass,
+  underConstruction,
+  openProductInfo,
+  onProductInfoAddToCart,
+  getQuantity,
+  setQuantity,
+  getQuantityNewly,
+  setQuantityNewly,
+  getPriceType,
+  setPriceType,
+  getPriceTypeNewly,
+  setPriceTypeNewly,
+  filteredProducts,
+  paginatedProducts,
+  totalPages,
+  toggleWeightRange,
+  toggleCutType,
+  onPriceRangeUpdate,
+  priceRangeLow,
+  priceRangeHigh,
+} = useCatalogPage();
+</script>

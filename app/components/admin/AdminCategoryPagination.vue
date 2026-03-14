@@ -14,7 +14,7 @@ const emit = defineEmits<{ (event: "update:currentPage", value: number): void; (
     <div class="flex items-center gap-4">
       <div class="flex items-center gap-2">
         <label class="text-sm font-medium text-gray-700">Row Per Page</label>
-        <select :value="props.rowsPerPage" @change="(e) => emit('update:rowsPerPage', +e.target.value)" class="px-3 py-1 border border-gray-300 rounded-lg text-sm bg-white hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-[#8B0101] focus:ring-offset-0">
+        <select :value="props.rowsPerPage" @change="(e) => emit('update:rowsPerPage', +(e.target as HTMLSelectElement)?.value)" class="px-3 py-1 border border-gray-300 rounded-lg text-sm bg-white hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-[#8B0101] focus:ring-offset-0">
           <option value="5">5</option>
           <option value="10">10</option>
           <option value="15">15</option>

@@ -31,7 +31,6 @@ const emit = defineEmits<{
   "update:quantity": [value: number];
   "update:priceType": [value: "retail" | "wholesale"];
   openInfo: [];
-  "add-to-cart": [quantity: number];
 }>();
 </script>
 
@@ -146,24 +145,6 @@ const emit = defineEmits<{
         <span class="text-base sm:text-lg font-bold text-[#8B0101]">
           ₱{{ typeof product.price === 'number' ? `${product.price}.00` : product.price }}
         </span>
-        <button
-          type="button"
-          class="px-2 py-1.5 sm:px-3 sm:py-2 bg-[#8B0101] text-white rounded text-xs sm:text-sm font-semibold hover:bg-[#6B0001] transition flex items-center gap-1"
-          :aria-label="`${labels.addLabel} ${product.name}`"
-          @click="
-            () => {
-              if (quantity <= 0) {
-                toastInfo('Please select a quantity first.');
-                return;
-              }
-              emit('add-to-cart', quantity);
-              toastInfo('Added to cart.');
-            }
-          "
-        >
-          <Icon name="mdi:cart" class="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-          {{ labels.addLabel }}
-        </button>
       </div>
     </div>
   </div>

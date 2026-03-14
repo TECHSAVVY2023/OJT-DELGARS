@@ -1,82 +1,20 @@
-<script setup lang="ts">
-import { usePageLoading } from "~/composables/usePageLoading";
-import { useLandingData } from "~/composables/useLandingData";
-import { useClientLoginModal } from "~/composables/useClientLoginModal";
-import { useToast } from "~/composables/useToast";
-import { useCart } from "~/composables/useCart";
-import { ref, onMounted } from "vue";
-
-const { stopLoading } = usePageLoading();
-const { hero, trust, browseCategories, catalog, about, contact } = useLandingData();
-const { showLoginModal, closeLogin } = useClientLoginModal();
-const { success, info: toastInfo } = useToast();
-const { addItem, totalCount } = useCart();
-
-function underConstruction() {
-  toastInfo("Under construction");
-}
-
-async function onLoginSuccess() {
-  success("Login successful!");
-  closeLogin();
-  await navigateTo("/admin/adminsahboard");
-}
-
-function updateLoginModal(value: boolean) {
-  showLoginModal.value = value;
-}
-
-const productQuantities = ref<Record<number, number>>({});
-const productPriceType = ref<Record<number, "retail" | "wholesale">>({});
-
-function getQuantity(productId: number) {
-  return productQuantities.value[productId] ?? 0;
-}
-
-function setQuantity(productId: number, qty: number) {
-  const product = catalog.value.products.find(
-    (p: { id: number; stock: number }) => p.id === productId,
-  );
-  const max = product ? product.stock : 999;
-  const next = Math.max(1, Math.min(max, qty));
-  productQuantities.value = { ...productQuantities.value, [productId]: next };
-}
-
-function setPriceType(productId: number, type: "retail" | "wholesale") {
-  productPriceType.value = { ...productPriceType.value, [productId]: type };
-}
-
-function handleAddToCart(
-  product: {
-    id: number;
-    name: string;
-    image: string;
-    price: string;
-  },
-  quantity: number,
-) {
-  addItem(product, quantity);
-}
-
-onMounted(() => {
-  // Initialize all product quantities to 1 by default
-  if (catalog.value?.products) {
-    const initial: Record<number, number> = {};
-    for (const p of catalog.value.products as Array<{ id: number }>) {
-      initial[p.id] = 1;
-    }
-    productQuantities.value = initial;
-  }
-
-  setTimeout(() => {
-    stopLoading();
-  }, 300);
-});
-</script>
 
 <template>
   <div class="min-h-screen bg-white">
     <ClientHeader />
+
+    <ClientProductInfoModal
+      :model-value="productInfoModalOpen"
+      :product="productInfoModalProduct"
+      :max-quantity="productInfoModalProduct ? (Number(productInfoModalProduct.stock) || 999) : 999"
+      :labels="{
+        brandLabel: 'By Delgar',
+        retailLabel: 'RETAIL',
+        wholesaleLabel: 'WHOLESALE',
+        inStockLabel: '1 in stock',
+      }"
+      @update:model-value="productInfoModalOpen = $event"
+    />
 
     <ClientLandingHero
       :title-parts="hero.titleParts"
@@ -116,6 +54,7 @@ onMounted(() => {
       @update:price-type="(id, type) => setPriceType(id, type)"
       @search="underConstruction"
       @add-to-cart="handleAddToCart"
+      @open-info="openProductInfo"
     />
 
     <ClientAboutSection
@@ -140,7 +79,7 @@ onMounted(() => {
     />
 
     <ClientFooter />
-    <ClientFab :cart-count="totalCount" @open-cart="navigateTo('/client/cart')" />
+    <ClientFab />
 
     <ClientLoginModal
       :model-value="showLoginModal"
@@ -155,3 +94,29 @@ onMounted(() => {
   scroll-behavior: smooth;
 }
 </style>
+
+<script setup lang="ts">
+import { useLandingPage } from '~/composables/useLandingPage';
+
+const {
+  hero,
+  trust,
+  browseCategories,
+  catalog,
+  about,
+  contact,
+  showLoginModal,
+  updateLoginModal,
+  onLoginSuccess,
+  productQuantities,
+  productPriceType,
+  productInfoModalOpen,
+  productInfoModalProduct,
+  setQuantity,
+  setPriceType,
+  handleAddToCart,
+  openProductInfo,
+  onProductInfoAddToCart,
+  underConstruction,
+} = useLandingPage();
+</script>

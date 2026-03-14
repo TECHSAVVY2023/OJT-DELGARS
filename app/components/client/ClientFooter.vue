@@ -20,7 +20,7 @@ function linkTo(link: { href: string }) {
 
 <template>
   <footer class="bg-[#8B0101] text-white py-12">
-    <div class="max-w-[96rem] mx-auto px-3 sm:px-4 lg:px-6">
+    <div class="max-w-384 mx-auto px-3 sm:px-4 lg:px-6">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 pb-8 border-b border-red-700">
         <!-- Contact -->
         <div>
