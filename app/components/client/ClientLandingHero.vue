@@ -14,10 +14,10 @@ defineProps<{
 <template>
   <section
     id="home"
-    class="relative min-h-[80vh] md:min-h-[85vh] flex flex-col md:flex-row overflow-hidden w-full"
+    class="relative min-h-[65vh] md:min-h-[85vh] flex flex-col-reverse md:flex-row overflow-hidden w-full"
   >
     <div
-      class="hero-left flex-1 flex items-center bg-[#FAF9F6] py-16 md:py-20 pr-5 sm:pr-6 lg:pr-8 xl:pr-12 pl-[max(1.25rem,calc((100vw-96rem)/2+1.25rem))] sm:pl-[max(1.5rem,calc((100vw-96rem)/2+1.5rem))] lg:pl-[max(2rem,calc((100vw-96rem)/2+2rem))] xl:pl-[max(3rem,calc((100vw-96rem)/2+3rem))]"
+      class="hero-left flex-1 flex items-center bg-[#FAF9F6] py-12 md:py-20 pr-5 sm:pr-6 lg:pr-8 xl:pr-12 pl-[max(1.25rem,calc((100vw-96rem)/2+1.25rem))] sm:pl-[max(1.5rem,calc((100vw-96rem)/2+1.5rem))] lg:pl-[max(2rem,calc((100vw-96rem)/2+2rem))] xl:pl-[max(3rem,calc((100vw-96rem)/2+3rem))]"
     >
       <div class="max-w-xl space-y-6 text-left animate-fade-in-left">
         <h1
@@ -60,10 +60,10 @@ defineProps<{
     </div>
 
     <div
-      class="hero-right relative flex-1 min-h-[50vh] md:min-h-0 bg-[#8B0101] flex items-center justify-center md:justify-end overflow-hidden pl-5 sm:pl-6 lg:pl-8 xl:pl-12 pr-[max(1.25rem,calc((100vw-96rem)/2+1.25rem))] sm:pr-[max(1.5rem,calc((100vw-96rem)/2+1.5rem))] lg:pr-[max(2rem,calc((100vw-96rem)/2+2rem))] xl:pr-[max(3rem,calc((100vw-96rem)/2+3rem))]"
+      class="hero-right relative flex-1 min-h-[45vh] md:min-h-0 bg-[#8B0101] flex items-center justify-center md:justify-end overflow-hidden pl-5 sm:pl-6 lg:pl-8 xl:pl-12 pr-[max(1.25rem,calc((100vw-96rem)/2+1.25rem))] sm:pr-[max(1.5rem,calc((100vw-96rem)/2+1.5rem))] lg:pr-[max(2rem,calc((100vw-96rem)/2+2rem))] xl:pr-[max(3rem,calc((100vw-96rem)/2+3rem))]"
     >
       <div
-        class="hero-freshness-strip absolute left-0 top-0 bottom-0 w-32 md:w-40 flex items-center justify-center bg-transparent animate-float"
+        class="hero-freshness-strip hidden md:flex absolute left-0 top-0 bottom-0 w-32 md:w-40 flex-col items-center justify-center bg-transparent animate-float"
         aria-hidden="true"
       >
         <span class="hero-freshness-text text-white font-bold tracking-[0.2em] select-none">
@@ -72,10 +72,10 @@ defineProps<{
       </div>
 
       <div
-        class="hero-circle-wrapper relative z-10 flex items-center justify-center w-full max-w-[min(58vw,200px)] aspect-square md:max-w-[min(40vw,360px)] md:-ml-8 lg:-ml-10 animate-bounce-slow"
+        class="hero-circle-wrapper relative z-10 flex items-center justify-center w-full max-w-[min(54vw,180px)] aspect-square md:max-w-[min(40vw,360px)] md:-ml-8 lg:-ml-10 animate-bounce-slow"
       >
         <div
-          class="hero-circle-outer w-full h-full rounded-full border-10 md:border-[14px] border-white bg-[#ADD8E6]/95 shadow-2xl flex items-center justify-center p-4 md:p-6 animate-pulse-glow"
+          class="hero-circle-outer w-full h-full rounded-full border-10 md:border-14 border-white bg-[#ADD8E6]/95 shadow-2xl flex items-center justify-center p-4 md:p-6 animate-pulse-glow"
         >
           <img
             src="/logo/delgar-logo.png"

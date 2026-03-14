@@ -11,7 +11,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-white">
+  <div class="min-h-screen bg-linear-to-b from-white via-slate-50 to-slate-100 text-slate-900 antialiased">
     <ClientHeader />
 
     <ClientAboutUsHero

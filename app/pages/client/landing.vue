@@ -80,12 +80,6 @@
 
     <ClientFooter />
     <ClientFab />
-
-    <ClientLoginModal
-      :model-value="showLoginModal"
-      @update:model-value="updateLoginModal"
-      @success="onLoginSuccess"
-    />
   </div>
 </template>
 
@@ -105,9 +99,6 @@ const {
   catalog,
   about,
   contact,
-  showLoginModal,
-  updateLoginModal,
-  onLoginSuccess,
   productQuantities,
   productPriceType,
   productInfoModalOpen,
